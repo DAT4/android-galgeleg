@@ -5,6 +5,16 @@ class Word(word: String) {
     val letters = word.toList().map { Letter(it) }
     val options = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ ".toList().map { Letter(it) }
 
+    fun done(): Boolean {
+        var isDone = true
+        letters.forEach {
+            if (!it.isGuessed()){
+                isDone = false
+            }
+        }
+        return isDone
+    }
+
     fun guess(letter: Letter): Boolean {
         var guessed = false
 

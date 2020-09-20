@@ -6,48 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hangman"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="fill_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/bogstaver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" />
 
-        <LinearLayout
-            app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/hangman"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal" />
+        <Button
+            android:id="@+id/play"
+            android:background="@color/colorPrimary"
+            android:text="Start Game"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp"
+            android:layout_width="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="80dp" />
 
-        <LinearLayout
-            android:id="@+id/tastatur"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="bottom"
-            android:padding="10dp"
-            android:orientation="horizontal"
-            android:layout_weight="10"
-            app:layout_constraintBottom_toBottomOf="parent">
-            <GridLayout
-                android:id="@+id/buttons"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:columnCount="5" />
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/exit"
+            android:background="@color/colorAccent"
+            android:text="Exit"
+            android:textColor="@color/colorPrimary"
+            android:textSize="30sp"
+            android:layout_width="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="80dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
