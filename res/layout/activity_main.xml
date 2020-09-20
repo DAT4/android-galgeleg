@@ -15,17 +15,38 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/bogstaver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal" />
 
-        <GridLayout
-            android:id="@+id/buttons"
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/hangman"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="5" />
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal" />
+
+        <LinearLayout
+            android:id="@+id/tastatur"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:padding="10dp"
+            android:orientation="horizontal"
+            android:layout_weight="10"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <GridLayout
+                android:id="@+id/buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="5" />
+        </LinearLayout>
 
     </LinearLayout>
 

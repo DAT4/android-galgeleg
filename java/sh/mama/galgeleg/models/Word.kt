@@ -1,7 +1,7 @@
 package sh.mama.galgeleg.models
 
 class Word(word: String) {
-    private val hangman = HangMan()
+    val hangman = HangMan()
     val letters = word.toList().map { Letter(it) }
     val options = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ ".toList().map { Letter(it) }
 
@@ -18,6 +18,9 @@ class Word(word: String) {
             }
         }
 
-        return guessed
+        return if (!guessed)
+            this.hangman.kill()
+        else
+            guessed
     }
 }
