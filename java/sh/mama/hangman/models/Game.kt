@@ -1,11 +1,11 @@
-package sh.mama.galgeleg.models
+package sh.mama.hangman.models
 
-class Word(word: String) {
+class Game(word: String) {
     val hangman = HangMan()
     val letters = word.toList().map { Letter(it) }
     val options = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ ".toList().map { Letter(it) }
 
-    fun done(): Boolean {
+    fun isDone(): Boolean {
         var isDone = true
         letters.forEach {
             if (!it.isGuessed()){

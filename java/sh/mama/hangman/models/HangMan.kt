@@ -1,9 +1,8 @@
-package sh.mama.galgeleg.models
+package sh.mama.hangman.models
 
-import android.graphics.drawable.Drawable
-import sh.mama.galgeleg.R
+import sh.mama.hangman.R
 
-class HangMan() {
+class HangMan {
     private var level = 0
 
     private val states = listOf(
@@ -18,7 +17,7 @@ class HangMan() {
 
     fun kill(): Boolean {
         this.level += 1
-        return this.states.size-1 > this.level
+        return this.states.size - 1 > this.level
     }
 
     fun getState(): Int {

@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hangman"
+        android:text="@string/hangman"
         android:textSize="50sp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +29,7 @@
         <Button
             android:id="@+id/play"
             android:background="@color/colorPrimary"
-            android:text="Start Game"
+            android:text="@string/start_game"
             android:textColor="@color/colorAccent"
             android:textSize="30sp"
             android:layout_width="300dp"
@@ -39,7 +39,7 @@
         <Button
             android:id="@+id/exit"
             android:background="@color/colorAccent"
-            android:text="Exit"
+            android:text="@string/exit"
             android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:layout_width="300dp"

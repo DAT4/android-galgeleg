@@ -1,4 +1,4 @@
-package sh.mama.galgeleg.models
+package sh.mama.hangman.models
 
 class Letter(letter: Char) {
     private val letter = letter.toUpperCase()
@@ -9,11 +9,11 @@ class Letter(letter: Char) {
     }
 
     fun guess(letter: Letter): Boolean {
-        if (letter.letter == this.letter) {
+        return if (letter.letter == this.letter) {
             this.guessed = true
-            return true
+            true
         } else {
-            return false
+            false
         }
     }
 
