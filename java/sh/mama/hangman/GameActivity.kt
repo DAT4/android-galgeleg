@@ -98,6 +98,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun won(game: Game) {
+        buttons.removeAllViews()
         Toast.makeText(this, "YOU WON!", Toast.LENGTH_LONG).show()
         game.letters.forEachIndexed { i, letter ->
             letters[i].setTextColor(Color.GREEN)
@@ -109,6 +110,7 @@ class GameActivity : AppCompatActivity() {
 
     private fun lost(game: Game) {
         printMan(game)
+        buttons.removeAllViews()
         Toast.makeText(this, "YOU LOST!", Toast.LENGTH_LONG).show()
         game.letters.forEachIndexed { i, letter ->
             if (!letter.isGuessed()) {

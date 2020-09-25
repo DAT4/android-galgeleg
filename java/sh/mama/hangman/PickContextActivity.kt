@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_pick_context.*
 import kotlinx.coroutines.Dispatchers
@@ -15,25 +16,15 @@ import java.net.URL
 
 class PickContextActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pick_context)
 
-        val csv = getCSV()
-        val button = Button(this)
-        button.layoutParams = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT
-        )
-        button.text = "OK"
-        button.setOnClickListener {
-            getCats(csv)
-        }
-        categories.addView(button)
+        getCSV()
+
     }
 
-    private fun getCats(csv: ArrayList<List<String>>){
+    private fun getCats(csv: ArrayList<List<String>>) {
         val contexts = getCategories(csv)
 
         for (category in contexts) {
@@ -57,13 +48,9 @@ class PickContextActivity : AppCompatActivity() {
         csv[0].forEachIndexed { i, title ->
             val category = Category(title)
 
-            var j = 0
-            while (true) {
-                if (csv[i][j] != "") {
-                    category.add(csv[i][j])
-                    j++
-                } else {
-                    break
+            csv.forEach{
+                if (it[i] != "") {
+                    category.add(it[i])
                 }
             }
             categories.add(category)
@@ -72,23 +59,22 @@ class PickContextActivity : AppCompatActivity() {
         return categories
     }
 
-    private fun getCSV(): ArrayList<List<String>> {
-        var data = ArrayList<List<String>>()
-
+    private fun getCSV() {
         GlobalScope.launch(Dispatchers.IO) {
             val url =
                 "https://docs.google.com/spreadsheets/d/1WwOCyZpTm13_J49AX4KICdvjTH2vxACD6C7tYmIKIhg/export?format=csv&id=1WwOCyZpTm13_J49AX4KICdvjTH2vxACD6C7tYmIKIhg"
             val csv = ArrayList<List<String>>()
-            URL(url).readText().split("\n").forEach { csv.add(it.split(",")) }
+            URL(url).readText().trim().split("\n").forEach { csv.add(it.trim().split(",")) }
             for (line in csv) {
                 println(line.toString())
             }
             launch(Dispatchers.Main) {
-                data = csv
+                getCats(csv)
+                Toast.makeText(this@PickContextActivity, "Data loaded...", Toast.LENGTH_SHORT)
+                    .show()
             }
 
             return@launch
         }
-        return data
     }
 }
