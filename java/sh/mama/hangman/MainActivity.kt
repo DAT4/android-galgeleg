@@ -21,12 +21,6 @@ class MainActivity : AppCompatActivity() {
         exit.setOnClickListener {
             end()
         }
-
-        val spinner = Spinner(this)
-        spinner.layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
     }
 
     private fun end() {
