@@ -1,14 +1,13 @@
 package sh.mama.hangman.models
 
-class Game(word: String) {
+data class Game(val word: Word) {
     val hangman = HangMan()
-    val letters = word.toList().map { Letter(it) }
     val options = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ ".toList().map { Letter(it) }
 
     fun isDone(): Boolean {
         var isDone = true
-        letters.forEach {
-            if (!it.isGuessed()){
+        this.word.letters.forEach {
+            if (!it.isGuessed()) {
                 isDone = false
             }
         }
@@ -22,7 +21,7 @@ class Game(word: String) {
             it.guess(letter)
         }
 
-        this.letters.forEach {
+        this.word.letters.forEach {
             if (it.guess(letter)) {
                 guessed = true
             }

@@ -11,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name="sh.mama.hangman.AddWordsActivity"/>
+        <activity android:name="sh.mama.hangman.EditContextActivity"/>
         <activity android:name="sh.mama.hangman.PickContextActivity"/>
         <activity android:name="sh.mama.hangman.GameActivity" />
         <activity android:name="sh.mama.hangman.MainActivity">

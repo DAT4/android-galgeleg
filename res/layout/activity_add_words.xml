@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="bottom"
+            android:text="Word"
+            android:textSize="20sp" />
+
+        <EditText
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:id="@+id/word_word"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:padding="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="bottom"
+            android:text="Description"
+            android:textSize="20sp" />
+
+        <EditText
+            android:inputType="textImeMultiLine"
+            android:imeOptions="actionDone"
+            android:id="@+id/word_description"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="bottom"
+            android:padding="15dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="bottom"
+            android:text="Difficulty"
+            android:textSize="20sp" />
+
+        <!-- THIS GRIDLAYOUT WILL HAVE 10 PROGRAMICALLY GENNERATED BUTTONS -->
+        <GridLayout
+            android:id="@+id/word_difficulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:columnCount="10"
+            android:gravity="center"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="bottom"
+            android:text="Hints"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/hints"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <EditText
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:id="@+id/word_hint1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="15dp"
+                android:hint="Hint 1" />
+
+            <EditText
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:id="@+id/word_hint2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="15dp"
+                android:hint="Hint 2" />
+
+            <EditText
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:id="@+id/word_hint3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="15dp"
+                android:hint="Hint 3" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:gravity="bottom"
+            android:text="Category"
+            android:textSize="20sp" />
+
+        <EditText
+            android:inputType="text"
+            android:imeOptions="actionDone"
+            android:id="@+id/word_category"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="15dp"
+            android:padding="15dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:layout_margin="15dp"
+            >
+            <Button
+                android:id="@+id/word_add"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="#C8E6C9"
+                android:padding="15dp"
+                android:text="Add" />
+
+            <Button
+                android:id="@+id/word_abort"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="15dp"
+                android:background="#F8BBD0"
+                android:padding="15dp"
+                android:text="Abort" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,13 +12,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import sh.mama.hangman.models.Category
-import java.lang.Exception
 import java.net.URL
 
 class PickContextActivity : AppCompatActivity() {
+    private var edit = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pick_context)
+        this.edit = intent.getSerializableExtra("edit") as Boolean
         getCategories()
     }
 
@@ -32,16 +33,22 @@ class PickContextActivity : AppCompatActivity() {
             )
             button.text = category.title
             button.setOnClickListener {
-                val game = Intent(this, GameActivity::class.java)
-                game.putExtra("word", category.getOne())
-                startActivity(game)
+                if (this.edit) {
+                    val editContext = Intent(this, EditContextActivity::class.java)
+                    editContext.putExtra("category", category)
+                    startActivity(editContext)
+                }else{
+                    val game = Intent(this, GameActivity::class.java)
+                    game.putExtra("word", category.getOne())
+                    startActivity(game)
+                }
             }
             categories.addView(button)
         }
     }
 
     private fun getCategories() {
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO){
             val data = URL("https://mama.sh/hangman/api").readText()
             launch(Dispatchers.Main) {
                 try {
@@ -50,11 +57,10 @@ class PickContextActivity : AppCompatActivity() {
                     finish()
                 }
             }
-            return@launch
         }
     }
 
-    private fun parseShit(data:String): List<Category>{
+    private fun parseShit(data: String): List<Category> {
         println(data)
         val gson = Gson()
         val categoriesType = object : TypeToken<List<Category>>() {}.type

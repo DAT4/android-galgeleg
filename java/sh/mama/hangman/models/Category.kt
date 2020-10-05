@@ -1,19 +1,10 @@
 package sh.mama.hangman.models
 
-data class Category(val title: String, val words: ArrayList<Word>) {
+import java.io.Serializable
 
-    data class Word(
-        val word: String,
-        val difficulty: Int,
-        val description: String,
-        val leads: List<String>
-    )
+data class Category(var title: String, val words: ArrayList<Word>): Serializable {
 
-    fun add(word: String) {
-        this.words.add(Word(word, 0, "", listOf("")))
-    }
-
-    fun getOne(): String {
-        return this.words[this.words.indices.random()].word
+    fun getOne(): Word {
+        return this.words[this.words.indices.random()]
     }
 }
