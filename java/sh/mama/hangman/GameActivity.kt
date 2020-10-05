@@ -5,12 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.*
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_game.*
 import sh.mama.hangman.models.Game
 import sh.mama.hangman.models.Letter
 import sh.mama.hangman.models.Word
-import java.util.concurrent.TimeUnit
 import androidx.appcompat.app.AlertDialog as AlertDialog
 
 class GameActivity : AppCompatActivity() {

@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         }
         add_word_button.setOnClickListener {
             val addWord = Intent(this, AddWordsActivity::class.java)
+            addWord.putExtra("create", true)
             startActivity(addWord)
         }
         exit.setOnClickListener {

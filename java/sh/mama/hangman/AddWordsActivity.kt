@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.core.view.get
@@ -25,22 +26,51 @@ import java.net.URL
 
 class AddWordsActivity : AppCompatActivity() {
     private var word = Word()
+    private var creating = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_words)
         val data = intent.getSerializableExtra("word")
+        this.creating = intent.getSerializableExtra("create") as Boolean
         if (data != null) {
             this.word = data as Word
         }
-        createButtons()
-        word_add.setOnClickListener {
-            updateFromFields()
-            GlobalScope.launch(Dispatchers.IO){
-                updateWord()
-                launch(Dispatchers.Main) {
-                    finish()
+        if (this.creating){
+            word_delete_box.removeAllViews()
+        } else {
+            word_delete.isActivated = true
+            word_delete.setOnClickListener {
+                if (it.isActivated) {
+                    GlobalScope.launch(Dispatchers.IO){
+                        updateWord("DELETE")
+                        launch(Dispatchers.Main) {
+                            finish()
+                        }
+                    }
+                } else {
+                    Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT).show()
                 }
+                it.isActivated = false
             }
+        }
+        createButtons()
+        word_add.isActivated = true
+        word_add.setOnClickListener {
+            if (it.isActivated) {
+                updateFromFields()
+                GlobalScope.launch(Dispatchers.IO){
+                    if (creating)
+                        updateWord("POST")
+                    else
+                        updateWord("PUT")
+                    launch(Dispatchers.Main) {
+                        finish()
+                    }
+                }
+            } else {
+                Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT).show()
+            }
+            it.isActivated = false
         }
         word_abort.setOnClickListener { finish() }
         fillData(this.word)
@@ -116,11 +146,11 @@ class AddWordsActivity : AppCompatActivity() {
         return gson.fromJson(data, categoriesType)
     }
 
-    private fun updateWord(): String {
+    private fun updateWord(action: String): String {
         val url = "https://mama.sh/hangman/api"
         val req = URL(url)
         val con = req.openConnection() as HttpURLConnection
-        con.requestMethod = "PUT"
+        con.requestMethod = action
         con.connectTimeout = 300000
         con.doOutput = true
         val gson = Gson()

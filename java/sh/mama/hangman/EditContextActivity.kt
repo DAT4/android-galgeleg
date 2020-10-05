@@ -9,18 +9,14 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.getSystemService
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_create_context.*
-import kotlinx.android.synthetic.main.activity_pick_context.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word
-import java.io.DataOutputStream
-import java.net.HttpURLConnection
 import java.net.URL
 
 class EditContextActivity : AppCompatActivity() {
@@ -33,6 +29,7 @@ class EditContextActivity : AppCompatActivity() {
         create_context.setOnClickListener {
             val create = Intent(this,AddWordsActivity::class.java)
             create.putExtra("word",Word(category = category.title))
+            create.putExtra("create", true)
             startActivity(create)
         }
         printButtons(category.words)
@@ -49,6 +46,7 @@ class EditContextActivity : AppCompatActivity() {
             button.setOnClickListener {
                 val editWord = Intent(this, AddWordsActivity::class.java)
                 editWord.putExtra("word", word)
+                editWord.putExtra("create", false)
                 startActivity(editWord)
             }
             word_list.addView(button)
