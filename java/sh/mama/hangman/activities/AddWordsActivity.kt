@@ -36,20 +36,21 @@ class AddWordsActivity : AppCompatActivity() {
         if (data != null) {
             this.word = data as Word
         }
-        if (this.creating){
+        if (this.creating) {
             word_delete_box.removeAllViews()
         } else {
             word_delete.isActivated = true
             word_delete.setOnClickListener {
                 if (it.isActivated) {
-                    GlobalScope.launch(Dispatchers.IO){
+                    GlobalScope.launch(Dispatchers.IO) {
                         updateWord("DELETE")
                         launch(Dispatchers.Main) {
                             finish()
                         }
                     }
                 } else {
-                    Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 it.isActivated = false
             }
@@ -59,7 +60,7 @@ class AddWordsActivity : AppCompatActivity() {
         word_add.setOnClickListener {
             if (it.isActivated) {
                 updateFromFields()
-                GlobalScope.launch(Dispatchers.IO){
+                GlobalScope.launch(Dispatchers.IO) {
                     if (creating)
                         updateWord("POST")
                     else
@@ -89,7 +90,7 @@ class AddWordsActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateFromFields(){
+    private fun updateFromFields() {
         this.word.word = word_word.text.toString()
         this.word.category = word_category.text.toString()
         this.word.description = word_description.text.toString()
@@ -98,19 +99,19 @@ class AddWordsActivity : AppCompatActivity() {
         this.word.hint3 = word_hint3.text.toString()
     }
 
-    private fun fillData(word: Word){
+    private fun fillData(word: Word) {
         word_word.setText(word.word)
         word_description.setText(word.description)
         word_hint1.setText(word.hint1)
         word_hint2.setText(word.hint2)
         word_hint3.setText(word.hint3)
         word_category.setText(word.category)
-        val button = word_difficulty[word.difficulty-1] as Button
+        val button = word_difficulty[word.difficulty - 1] as Button
         button.setBackgroundColor(Color.GRAY)
     }
 
-    private fun createButtons(){
-        for(i in 1..10) {
+    private fun createButtons() {
+        for (i in 1..10) {
             val button = Button(this)
             button.layoutParams = RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -135,7 +136,7 @@ class AddWordsActivity : AppCompatActivity() {
 
 
     private fun makeCategory() {
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch(Dispatchers.IO) {
             val data = URL("https://mama.sh/hangman/api").readText()
         }
     }

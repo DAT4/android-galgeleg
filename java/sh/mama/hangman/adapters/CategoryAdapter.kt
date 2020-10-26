@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
 import sh.mama.hangman.activities.EditContextActivity
@@ -13,8 +12,8 @@ import sh.mama.hangman.R
 import sh.mama.hangman.models.Category
 
 class CategoryAdapter(
-    var categories: List<Category>,
-    val edit: Boolean
+    private var categories: List<Category>,
+    private val edit: Boolean
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHoler>() {
     inner class CategoryViewHoler(itemView: View) : RecyclerView.ViewHolder(itemView)
 

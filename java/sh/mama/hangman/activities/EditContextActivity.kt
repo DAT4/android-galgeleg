@@ -29,7 +29,7 @@ class EditContextActivity : AppCompatActivity() {
         abort.setOnClickListener { finish() }
         create_context.setOnClickListener {
             val create = Intent(this, AddWordsActivity::class.java)
-            create.putExtra("word",Word(category = category.title))
+            create.putExtra("word", Word(category = category.title))
             create.putExtra("create", true)
             startActivity(create)
         }

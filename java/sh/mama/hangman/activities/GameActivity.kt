@@ -25,7 +25,7 @@ class GameActivity : AppCompatActivity() {
         createWord()
         printMan()
         generateKeyboard()
-        countDownTimer = object: CountDownTimer(60*1000*5,1000) {
+        countDownTimer = object : CountDownTimer(60 * 1000 * 5, 1000) {
             override fun onTick(p0: Long) {
                 val minutes = p0 / 1000 / 60
                 val seconds = p0 / 1000 % 60
@@ -50,7 +50,7 @@ class GameActivity : AppCompatActivity() {
                 des.setMessage(game.word.hint2)
             if (hintcounter == 3)
                 des.setMessage(game.word.hint3)
-            des.setPositiveButton("OK") {a,b ->}
+            des.setPositiveButton("OK") { a, b -> }
             des.show()
             hintcounter++
         }
@@ -129,7 +129,7 @@ class GameActivity : AppCompatActivity() {
         val des = AlertDialog.Builder(this)
         des.setTitle(game.word.word)
         des.setMessage(game.word.description)
-        des.setPositiveButton("Restart") {a,b -> finish() }
+        des.setPositiveButton("Restart") { a, b -> finish() }
         des.show()
     }
 

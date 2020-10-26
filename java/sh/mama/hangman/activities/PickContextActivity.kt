@@ -30,7 +30,7 @@ class PickContextActivity : AppCompatActivity() {
     }
 
     private fun getCategories() {
-        GlobalScope.launch(Dispatchers.IO){
+        GlobalScope.launch(Dispatchers.IO) {
             val data = URL("https://mama.sh/hangman/api").readText()
             launch(Dispatchers.Main) {
                 try {
