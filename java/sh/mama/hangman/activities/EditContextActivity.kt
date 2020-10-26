@@ -9,13 +9,17 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_create_context.*
+import kotlinx.android.synthetic.main.activity_pick_context.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import sh.mama.hangman.R
+import sh.mama.hangman.adapters.CategoryAdapter
+import sh.mama.hangman.adapters.WordAdapter
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word
 import java.net.URL
@@ -36,22 +40,10 @@ class EditContextActivity : AppCompatActivity() {
         printButtons(category.words)
     }
 
-    private fun printButtons(data: List<Word>) {
-        for (word in data) {
-            val button = Button(this)
-            button.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            button.text = word.word
-            button.setOnClickListener {
-                val editWord = Intent(this, AddWordsActivity::class.java)
-                editWord.putExtra("word", word)
-                editWord.putExtra("create", false)
-                startActivity(editWord)
-            }
-            word_list.addView(button)
-        }
+    private fun printButtons(data: MutableList<Word>) {
+        val adapter = WordAdapter(data)
+        word_list.adapter = adapter
+        word_list.layoutManager = LinearLayoutManager(this)
     }
 
     private fun EditText.onSubmit(func: () -> Unit) {
