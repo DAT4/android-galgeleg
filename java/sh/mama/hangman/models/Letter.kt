@@ -17,7 +17,7 @@ class Letter(letter: Char) {
         }
     }
 
-    override fun toString(): String{
+    override fun toString(): String {
         return this.letter.toString()
     }
 }
