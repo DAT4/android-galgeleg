@@ -1,4 +1,4 @@
-package sh.mama.hangman
+package sh.mama.hangman.activities
 
 import android.content.Context
 import android.content.Intent
@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_create_context.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import sh.mama.hangman.R
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word
 import java.net.URL
@@ -27,7 +28,7 @@ class EditContextActivity : AppCompatActivity() {
         this.category = intent.getSerializableExtra("category") as Category
         abort.setOnClickListener { finish() }
         create_context.setOnClickListener {
-            val create = Intent(this,AddWordsActivity::class.java)
+            val create = Intent(this, AddWordsActivity::class.java)
             create.putExtra("word",Word(category = category.title))
             create.putExtra("create", true)
             startActivity(create)

@@ -1,4 +1,4 @@
-package sh.mama.hangman
+package sh.mama.hangman.activities
 
 import android.content.Context
 import android.graphics.Color
@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.activity_add_words.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import sh.mama.hangman.R
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word
 import java.io.DataOutputStream

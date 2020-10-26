@@ -1,9 +1,10 @@
-package sh.mama.hangman
+package sh.mama.hangman.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
+import sh.mama.hangman.R
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {

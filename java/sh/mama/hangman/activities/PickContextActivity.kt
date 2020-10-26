@@ -1,16 +1,16 @@
-package sh.mama.hangman
+package sh.mama.hangman.activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_pick_context.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import sh.mama.hangman.R
+import sh.mama.hangman.adapters.CategoryAdapter
 import sh.mama.hangman.models.Category
 import java.net.URL
 
@@ -24,27 +24,9 @@ class PickContextActivity : AppCompatActivity() {
     }
 
     private fun printButtons(data: List<Category>) {
-        for (category in data) {
-            println(category.title)
-            val button = Button(this)
-            button.layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            button.text = category.title
-            button.setOnClickListener {
-                if (this.edit) {
-                    val editContext = Intent(this, EditContextActivity::class.java)
-                    editContext.putExtra("category", category)
-                    startActivity(editContext)
-                }else{
-                    val game = Intent(this, GameActivity::class.java)
-                    game.putExtra("word", category.getOne())
-                    startActivity(game)
-                }
-            }
-            categories.addView(button)
-        }
+        val adapter = CategoryAdapter(data, edit)
+        categories.adapter = adapter
+        categories.layoutManager = LinearLayoutManager(this)
     }
 
     private fun getCategories() {
@@ -60,8 +42,7 @@ class PickContextActivity : AppCompatActivity() {
         }
     }
 
-    private fun parseShit(data: String): List<Category> {
-        println(data)
+    private fun parseShit(data: String): MutableList<Category> {
         val gson = Gson()
         val categoriesType = object : TypeToken<List<Category>>() {}.type
         return gson.fromJson(data, categoriesType)

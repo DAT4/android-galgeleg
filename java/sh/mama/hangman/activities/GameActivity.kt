@@ -1,4 +1,4 @@
-package sh.mama.hangman
+package sh.mama.hangman.activities
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_game.*
+import sh.mama.hangman.R
 import sh.mama.hangman.models.Game
 import sh.mama.hangman.models.Letter
 import sh.mama.hangman.models.Word
