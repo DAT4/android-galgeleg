@@ -11,11 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="sh.mama.hangman.AddWordsActivity"/>
-        <activity android:name="sh.mama.hangman.EditContextActivity"/>
-        <activity android:name="sh.mama.hangman.PickContextActivity"/>
-        <activity android:name="sh.mama.hangman.GameActivity" />
-        <activity android:name="sh.mama.hangman.MainActivity">
+        <activity android:name="sh.mama.hangman.activities.AddWordsActivity"/>
+        <activity android:name="sh.mama.hangman.activities.EditContextActivity"/>
+        <activity android:name="sh.mama.hangman.activities.PickContextActivity"/>
+        <activity android:name="sh.mama.hangman.activities.GameActivity" />
+        <activity android:name="sh.mama.hangman.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
