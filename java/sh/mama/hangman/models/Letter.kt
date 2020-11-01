@@ -1,6 +1,8 @@
 package sh.mama.hangman.models
 
-class Letter(letter: Char) {
+import java.io.Serializable
+
+class Letter(letter: Char):Serializable {
     private val letter = letter.toUpperCase()
     private var guessed = false
 

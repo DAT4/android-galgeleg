@@ -1,16 +1,16 @@
 package sh.mama.hangman.activities
 
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import sh.mama.hangman.R
 import sh.mama.hangman.models.Game
 import sh.mama.hangman.models.Letter
 import sh.mama.hangman.models.Word
-import androidx.appcompat.app.AlertDialog as AlertDialog
 
 class PlayGameActivity : AppCompatActivity() {
     private lateinit var game: Game
@@ -38,7 +38,7 @@ class PlayGameActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                endGame()
+                endGame(false)
             }
         }.start()
 
@@ -97,13 +97,13 @@ class PlayGameActivity : AppCompatActivity() {
         if (button.isActivated) {
             val stillAlive = game.guess(letter)
             if (!stillAlive) {
-                lost()
+                endGame(false)
             } else {
                 button.text = ""
                 button.isActivated = false
                 updateWord()
                 if (game.isDone()) {
-                    won()
+                    endGame(true)
                 } else {
                     printMan()
                 }
@@ -127,7 +127,14 @@ class PlayGameActivity : AppCompatActivity() {
         return button
     }
 
-    private fun endGame() {
+    private fun endGame(won: Boolean) {
+        val intent = Intent(this, EndGameActivity::class.java)
+        intent.putExtra("won", won)
+        intent.putExtra("word", this.game.word)
+        startActivity(intent)
+    }
+
+    private fun alerting() {
         val des = AlertDialog.Builder(this)
         des.setTitle(game.word.word)
         des.setMessage(game.word.description)
@@ -135,24 +142,5 @@ class PlayGameActivity : AppCompatActivity() {
         des.show()
     }
 
-    private fun won() {
-        endGame()
-        game.word.letters.forEachIndexed { i, letter ->
-            letters[i].setTextColor(Color.GREEN)
-            letters[i].text = game.word.letters[i].toString()
-        }
-        state.setImageResource(R.drawable.win)
-    }
-
-    private fun lost() {
-        endGame()
-        game.word.letters.forEachIndexed { i, letter ->
-            if (!letter.isGuessed()) {
-                letters[i].setTextColor(Color.RED)
-                letters[i].text = game.word.letters[i].toString()
-            }
-        }
-        printMan()
-    }
 }
 
