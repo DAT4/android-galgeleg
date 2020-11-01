@@ -28,7 +28,7 @@ class PlayGameActivity : AppCompatActivity() {
         word.make()
         game = Game(word)
         createWord()
-        printMan()
+        state.setImageResource(game.hangman.getState())
         generateKeyboard()
 
         countDownTimer = object : CountDownTimer(60 * 1000 * 5, 1000) {
@@ -87,10 +87,6 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
-    private fun printMan() {
-        state.setImageResource(game.hangman.getState())
-    }
-
     private fun generateKeyboard() {
         for (option in game.options) {
             val button = createButton(option.toString()) { guess(it, option) }
@@ -110,7 +106,7 @@ class PlayGameActivity : AppCompatActivity() {
                 if (game.isDone()) {
                     endGame(true)
                 } else {
-                    printMan()
+                    state.setImageResource(game.hangman.getState())
                 }
             }
         } else {

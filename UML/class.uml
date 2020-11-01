@@ -1,0 +1,79 @@
+@startuml
+skinparam linetype ortho 
+package observers {
+
+class EditCategoryActivity {
+    - category:Category
+    - printButtons()
+}
+class EditWordActivity{
+    - difficulty:Int
+    - updatefromfields():Word
+    - fillData()
+    - createButtons()
+}
+class PickCategoryActivity{
+    - edit
+    - printButtons()
+}
+}
+
+package adapters{
+class CategoryAdapter{
+    - categories:list<category>
+    - edit:boolean
+    + oncreateviewholder():categoryviewholder
+    + onbindviewholder()
+    + getitemcount():int
+
+}
+class CategoryViewHolder<RecyclerView\nViewHolder>
+CategoryAdapter +-- CategoryViewHolder
+
+class WordAdapter{
+    - words:List<Word>
+    - buttonClick:AlphaAnimation
+    + onCreateViewHolder():WordViewHolder
+    + onBindViewHolder()
+    + getItemCount():Int
+
+}
+class WordViewHolder<RecyclerView\nViewHolder>
+WordAdapter +-- WordViewHolder
+}
+class DataGetter <<(O,#FF7700)>>{
+    + getWords()
+    + parseShit():MutableList<Word>
+    + updateWord()
+}
+
+class ConcreteWords <<(O,#FF7700)>>{
+    - words:MutableList<Word>
+    + isNull():Boolean
+    + getCategories():MutableList<Category>
+    + getCategory():Category
+    + setWords()
+}
+interface IObservable {
+    + observers:ArrayList<IObserver>
+    + add()
+    + remove()
+    + sendUpdateEvent()
+}
+interface IObserver{
+    + update()
+}
+
+ConcreteWords -|> IObservable 
+
+EditCategoryActivity ..|> IObserver
+EditWordActivity ..|> IObserver
+PickCategoryActivity ..|> IObserver
+DataGetter ..> PickCategoryActivity
+DataGetter ..> EditWordActivity
+ConcreteWords .. observers
+PickCategoryActivity ...> CategoryAdapter
+EditCategoryActivity ...> WordAdapter
+
+
+@enduml
