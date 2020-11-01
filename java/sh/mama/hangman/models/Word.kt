@@ -3,6 +3,7 @@ package sh.mama.hangman.models
 import java.io.Serializable
 
 data class Word(
+    val ID: String = "",
     var word: String = "",
     var difficulty: Int = 1,
     var description: String = "",

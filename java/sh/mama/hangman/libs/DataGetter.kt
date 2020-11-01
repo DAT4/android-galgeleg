@@ -15,7 +15,7 @@ import java.net.URL
 
 object DataGetter {
 
-    fun getCategories() {
+    fun getWords() {
         GlobalScope.launch(Dispatchers.IO) {
             val data = URL("https://mama.sh/hangman/api").readText()
             launch(Dispatchers.Main) {
@@ -56,10 +56,7 @@ object DataGetter {
                     inputLine = it.readLine()
                 }
                 launch(Dispatchers.Main) {
-                    if (action == "DELETE")
-                        deleteWord(word)
-                    else
-                        addWord(word)
+                    getWords()
                 }
             }
         }

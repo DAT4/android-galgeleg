@@ -1,14 +1,13 @@
 package sh.mama.hangman.activities
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_pick_context.*
 import sh.mama.hangman.Observer.IObserver
 import sh.mama.hangman.R
 import sh.mama.hangman.adapters.CategoryAdapter
-import sh.mama.hangman.libs.DataGetter.getCategories
+import sh.mama.hangman.libs.DataGetter.getWords
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.Observer.wordsHolder
 
@@ -23,7 +22,7 @@ class PickCategoryActivity : AppCompatActivity(), IObserver {
         wordsHolder.add(this)
         isOnScreen = true
         if (wordsHolder.isNull()){
-            getCategories()
+            getWords()
         } else {
             printButtons(wordsHolder.getCategories())
         }
@@ -48,6 +47,11 @@ class PickCategoryActivity : AppCompatActivity(), IObserver {
         if(needUpdate){
             printButtons(wordsHolder.getCategories())
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        wordsHolder.remove(this)
     }
 
     private fun printButtons(data: List<Category>) {

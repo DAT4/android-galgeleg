@@ -14,14 +14,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_add_words.*
+import sh.mama.hangman.Observer.IObserver
+import sh.mama.hangman.Observer.wordsHolder
 import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
-import sh.mama.hangman.Observer.wordsHolder.deleteWord
 
-class EditWordsActivity : AppCompatActivity() {
+class EditWordsActivity : AppCompatActivity(), IObserver {
     private lateinit var word: Word
     private var creating = false
+
+    override fun update() {
+        finish()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +37,8 @@ class EditWordsActivity : AppCompatActivity() {
         }
         this.creating = intent.getSerializableExtra("create") as Boolean
 
+        wordsHolder.add(this)
+
         if (this.creating) {
             word_delete.visibility = View.GONE
         } else {
@@ -39,16 +46,13 @@ class EditWordsActivity : AppCompatActivity() {
             word_delete.setOnClickListener {
                 if (it.isActivated) {
                     DataGetter.updateWord(this.word, "DELETE")
-                    deleteWord(this.word)
                     it.isActivated = false
-                    finish()
                 } else {
                     Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT)
                         .show()
                 }
             }
         }
-
         createButtons()
 
         word_add.isActivated = true
@@ -58,7 +62,6 @@ class EditWordsActivity : AppCompatActivity() {
                     updateFromFields()
                     DataGetter.updateWord(this.word, "POST")
                 } else {
-                    deleteWord(word)
                     updateFromFields()
                     DataGetter.updateWord(this.word, "PUT")
                 }
