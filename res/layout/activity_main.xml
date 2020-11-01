@@ -37,6 +37,16 @@
             android:layout_height="80dp" />
 
         <Button
+            android:id="@+id/watch_highscores"
+            android:background="#9C27B0"
+            android:text="Highscores"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp"
+            android:layout_width="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_height="80dp" />
+
+        <Button
             android:id="@+id/add_word_button"
             android:background="#B2DFDB"
             android:text="Add Word"

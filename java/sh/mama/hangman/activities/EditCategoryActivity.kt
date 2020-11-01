@@ -5,34 +5,25 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_create_context.*
-import kotlinx.android.synthetic.main.activity_pick_context.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import sh.mama.hangman.R
-import sh.mama.hangman.adapters.CategoryAdapter
 import sh.mama.hangman.adapters.WordAdapter
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word
-import java.net.URL
 
-class EditContextActivity : AppCompatActivity() {
+class EditCategoryActivity : AppCompatActivity() {
     private lateinit var category: Category
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_context)
         this.category = intent.getSerializableExtra("category") as Category
         abort.setOnClickListener { finish() }
         create_context.setOnClickListener {
-            val create = Intent(this, AddWordsActivity::class.java)
+            val create = Intent(this, EditWordsActivity::class.java)
             create.putExtra("word", Word(category = category.title))
             create.putExtra("create", true)
             startActivity(create)
@@ -57,20 +48,5 @@ class EditContextActivity : AppCompatActivity() {
             true
         }
     }
-
-
-    private fun makeCategory() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val data = URL("https://mama.sh/hangman/api").readText()
-        }
-    }
-
-    private fun parseShit(data: String): List<Category> {
-        println(data)
-        val gson = Gson()
-        val categoriesType = object : TypeToken<List<Category>>() {}.type
-        return gson.fromJson(data, categoriesType)
-    }
-
 
 }

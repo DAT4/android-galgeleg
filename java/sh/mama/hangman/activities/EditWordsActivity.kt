@@ -3,6 +3,7 @@ package sh.mama.hangman.activities
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
@@ -12,63 +13,56 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.core.view.get
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_add_words.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import sh.mama.hangman.R
-import sh.mama.hangman.models.Category
+import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
-import java.io.DataOutputStream
-import java.net.HttpURLConnection
-import java.net.URL
+import sh.mama.hangman.Observer.wordsHolder.deleteWord
 
-class AddWordsActivity : AppCompatActivity() {
-    private var word = Word()
+class EditWordsActivity : AppCompatActivity() {
+    private lateinit var word: Word
     private var creating = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_words)
-        val data = intent.getSerializableExtra("word")
-        this.creating = intent.getSerializableExtra("create") as Boolean
+        val data = intent.getSerializableExtra("word") as Word?
         if (data != null) {
-            this.word = data as Word
+            this.word = data
         }
+        this.creating = intent.getSerializableExtra("create") as Boolean
+
         if (this.creating) {
-            word_delete_box.removeAllViews()
+            word_delete.visibility = View.GONE
         } else {
             word_delete.isActivated = true
             word_delete.setOnClickListener {
                 if (it.isActivated) {
-                    GlobalScope.launch(Dispatchers.IO) {
-                        updateWord("DELETE")
-                        launch(Dispatchers.Main) {
-                            finish()
-                        }
-                    }
+                    DataGetter.updateWord(this.word, "DELETE")
+                    deleteWord(this.word)
+                    it.isActivated = false
+                    finish()
                 } else {
                     Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT)
                         .show()
                 }
-                it.isActivated = false
             }
         }
+
         createButtons()
+
         word_add.isActivated = true
         word_add.setOnClickListener {
             if (it.isActivated) {
-                updateFromFields()
-                GlobalScope.launch(Dispatchers.IO) {
-                    if (creating)
-                        updateWord("POST")
-                    else
-                        updateWord("PUT")
-                    launch(Dispatchers.Main) {
-                        finish()
-                    }
+                if (creating) {
+                    updateFromFields()
+                    DataGetter.updateWord(this.word, "POST")
+                } else {
+                    deleteWord(word)
+                    updateFromFields()
+                    DataGetter.updateWord(this.word, "PUT")
                 }
+
             } else {
                 Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT).show()
             }
@@ -121,7 +115,7 @@ class AddWordsActivity : AppCompatActivity() {
             button.layoutParams.height = 100
             button.layoutParams.width = 100
             button.setTextColor(Color.GREEN)
-            button.setTextSize(10F)
+            button.textSize = 10F
             button.setBackgroundColor(Color.BLACK)
             button.setOnClickListener {
                 word_difficulty.forEach { that ->
@@ -131,48 +125,6 @@ class AddWordsActivity : AppCompatActivity() {
                 this.word.difficulty = i
             }
             word_difficulty.addView(button)
-        }
-    }
-
-
-    private fun makeCategory() {
-        GlobalScope.launch(Dispatchers.IO) {
-            val data = URL("https://mama.sh/hangman/api").readText()
-        }
-    }
-
-    private fun parseShit(data: String): List<Category> {
-        println(data)
-        val gson = Gson()
-        val categoriesType = object : TypeToken<List<Category>>() {}.type
-        return gson.fromJson(data, categoriesType)
-    }
-
-    private fun updateWord(action: String): String {
-        val url = "https://mama.sh/hangman/api"
-        val req = URL(url)
-        val con = req.openConnection() as HttpURLConnection
-        con.requestMethod = action
-        con.connectTimeout = 300000
-        con.doOutput = true
-        val gson = Gson()
-        val json = gson.toJson(this.word)
-        println(json)
-        val data = (json).toByteArray()
-        con.setRequestProperty("User-Agent", "Your-Mom")
-        con.setRequestProperty("Content-Type", "application/json")
-
-        val request = DataOutputStream(con.outputStream)
-        request.write(data)
-        request.flush()
-        con.inputStream.bufferedReader().use {
-            val response = StringBuffer()
-            var inputLine = it.readLine()
-            while (inputLine != null) {
-                response.append(inputLine)
-                inputLine = it.readLine()
-            }
-            return response.toString()
         }
     }
 }

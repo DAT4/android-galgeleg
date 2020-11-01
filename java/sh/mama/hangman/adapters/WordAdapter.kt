@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
-import sh.mama.hangman.activities.EditContextActivity
-import sh.mama.hangman.activities.GameActivity
+import sh.mama.hangman.activities.PlayGameActivity
 import sh.mama.hangman.R
+import sh.mama.hangman.activities.EditWordsActivity
 import sh.mama.hangman.models.Word
 
 class WordAdapter(
@@ -27,7 +27,7 @@ class WordAdapter(
             catTitle.text = words[position].word
             catCount.text = words[position].difficulty.toString()
             catTitle.setOnClickListener {
-                val editWord = Intent(catTitle.context, GameActivity::class.java)
+                val editWord = Intent(catTitle.context, EditWordsActivity::class.java)
                 editWord.putExtra("word", words[position])
                 editWord.putExtra("create", false)
                 catTitle.context.startActivity(editWord)

@@ -12,7 +12,7 @@ import sh.mama.hangman.models.Letter
 import sh.mama.hangman.models.Word
 import androidx.appcompat.app.AlertDialog as AlertDialog
 
-class GameActivity : AppCompatActivity() {
+class PlayGameActivity : AppCompatActivity() {
     private lateinit var game: Game
     private val letters = ArrayList<TextView>()
     private lateinit var countDownTimer: CountDownTimer
