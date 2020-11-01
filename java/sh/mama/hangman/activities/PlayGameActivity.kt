@@ -1,11 +1,14 @@
 package sh.mama.hangman.activities
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.LayoutInflater
 import android.view.animation.AlphaAnimation
-import android.widget.*
+import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
@@ -90,7 +93,7 @@ class PlayGameActivity : AppCompatActivity() {
 
     private fun generateKeyboard() {
         for (option in game.options) {
-            val button = createButton(option.toString(), 150) { guess(it, option) }
+            val button = createButton(option.toString()) { guess(it, option) }
             buttons.addView(button)
         }
     }
@@ -116,16 +119,10 @@ class PlayGameActivity : AppCompatActivity() {
     }
 
     private val buttonClick = AlphaAnimation(1F, 0.8F)
-    private fun createButton(title: String, width: Int, function: (button: Button) -> Unit): Button {
-        val button = Button(this)
-        button.layoutParams = RelativeLayout.LayoutParams(
-            RelativeLayout.LayoutParams.WRAP_CONTENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
-        )
-        button.layoutParams.width = width
-        button.textSize = 24F
+    private fun createButton(title: String, function: (button: Button) -> Unit): Button {
+        val inflater = LayoutInflater.from(this)
+        val button = inflater.inflate(R.layout.button_letter, null, false) as Button
         button.text = title
-        button.setBackgroundColor(Color.BLUE)
         button.isActivated = true
         button.setOnClickListener {
             button.startAnimation(buttonClick)
