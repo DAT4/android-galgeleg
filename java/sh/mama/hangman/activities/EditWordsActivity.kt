@@ -19,10 +19,11 @@ import sh.mama.hangman.Observer.IObserver
 import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
+import kotlin.properties.Delegates
 
 class EditWordsActivity : AppCompatActivity(), IObserver {
     private var creating = false
-    private var difficulty = 0
+    private var difficulty = 1
 
     override fun update() {
         finish()
@@ -31,8 +32,10 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_words)
-        var word = intent.getSerializableExtra("word") as Word
+        var word = intent.getSerializableExtra("word") as Word?
         this.creating = intent.getSerializableExtra("create") as Boolean
+        if (word == null) word = Word()
+        else this.difficulty = word.difficulty
 
         ConcreteWords.add(this)
 
@@ -42,7 +45,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
             word_delete.isActivated = true
             word_delete.setOnClickListener {
                 if (it.isActivated) {
-                    DataGetter.updateWord(word, "DELETE")
+                    DataGetter.updateWord(word!!, "DELETE")
                     it.isActivated = false
                 } else {
                     Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT)
@@ -54,12 +57,12 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
 
         word_add.isActivated = true
         word_add.setOnClickListener {
-            if (it.isActivated) {
-                word = updateFromFields(word)
+            if (it.isActivated ) {
+                word = updateFromFields(word!!)
                 if (creating) {
-                    DataGetter.updateWord(word, "POST")
+                    DataGetter.updateWord(word!!, "POST")
                 } else {
-                    DataGetter.updateWord(word, "PUT")
+                    DataGetter.updateWord(word!!, "PUT")
                 }
 
             } else {
@@ -68,7 +71,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
             it.isActivated = false
         }
         word_abort.setOnClickListener { finish() }
-        fillData(word)
+        fillData(word!!)
     }
 
     private fun EditText.onSubmit(func: () -> Unit) {
