@@ -25,6 +25,7 @@ class PlayGameActivity : AppCompatActivity() {
         createWord()
         printMan()
         generateKeyboard()
+
         countDownTimer = object : CountDownTimer(60 * 1000 * 5, 1000) {
             override fun onTick(p0: Long) {
                 val minutes = p0 / 1000 / 60
@@ -40,6 +41,7 @@ class PlayGameActivity : AppCompatActivity() {
                 endGame()
             }
         }.start()
+
         var hintcounter = 1
         game_hint.setOnClickListener {
             val des = AlertDialog.Builder(this)

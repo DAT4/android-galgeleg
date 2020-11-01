@@ -16,7 +16,7 @@ class HangMan {
     )
 
     fun kill(): Boolean {
-        this.level += 1
+        this.level++
         return this.states.size - 1 > this.level
     }
 

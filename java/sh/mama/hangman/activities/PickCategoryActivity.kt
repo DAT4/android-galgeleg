@@ -9,49 +9,30 @@ import sh.mama.hangman.R
 import sh.mama.hangman.adapters.CategoryAdapter
 import sh.mama.hangman.libs.DataGetter.getWords
 import sh.mama.hangman.models.Category
-import sh.mama.hangman.Observer.wordsHolder
+import sh.mama.hangman.Observer.ConcreteWords
 
 class PickCategoryActivity : AppCompatActivity(), IObserver {
     private var edit = false
     private var needUpdate = false
-    var isOnScreen = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pick_context)
         this.edit = intent.getSerializableExtra("edit") as Boolean
-        wordsHolder.add(this)
-        isOnScreen = true
-        if (wordsHolder.isNull()){
+        ConcreteWords.add(this)
+        if (ConcreteWords.isNull()){
             getWords()
         } else {
-            printButtons(wordsHolder.getCategories())
+            printButtons(ConcreteWords.getCategories())
         }
     }
 
     override fun update() {
-        if (isOnScreen){
-            printButtons(wordsHolder.getCategories())
-        }
-        else
-            this.needUpdate = true
-    }
-
-    override fun onPause() {
-        super.onPause()
-        isOnScreen = false
-    }
-
-    override fun onResume() {
-        super.onResume()
-        isOnScreen = true
-        if(needUpdate){
-            printButtons(wordsHolder.getCategories())
-        }
+        printButtons(ConcreteWords.getCategories())
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        wordsHolder.remove(this)
+        ConcreteWords.remove(this)
     }
 
     private fun printButtons(data: List<Category>) {

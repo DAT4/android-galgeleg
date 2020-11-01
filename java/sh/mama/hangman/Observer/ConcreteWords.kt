@@ -3,26 +3,12 @@ package sh.mama.hangman.Observer
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word
 
-object wordsHolder : IObservable {
+object ConcreteWords : IObservable {
     private var words: MutableList<Word> = ArrayList()
     override val observers: ArrayList<IObserver> = ArrayList()
 
     fun isNull(): Boolean{
         return this.words.isEmpty()
-    }
-
-    fun deleteWord(word: Word) {
-        this.words.remove(word)
-        sendUpdateEvent()
-    }
-
-    fun addWord(word: Word) {
-        this.words.add(word)
-        sendUpdateEvent()
-    }
-
-    fun getWords(): MutableList<Word> {
-        return this.words
     }
 
     fun getCategories(): MutableList<Category> {
@@ -40,6 +26,16 @@ object wordsHolder : IObservable {
             }
         }
         return categories
+    }
+
+    fun getCategory(title: String): Category {
+        val category : Category = Category(title,ArrayList())
+        this.words.forEach { word ->
+            if (word.category == category.title) {
+                    category.words.add(word)
+                }
+        }
+        return category
     }
 
     fun setWords(words: MutableList<Word>) {

@@ -26,7 +26,7 @@ class WordAdapter(
         holder.itemView.apply {
             catTitle.text = words[position].word
             catCount.text = words[position].difficulty.toString()
-            catTitle.setOnClickListener {
+            content_box.setOnClickListener {
                 val editWord = Intent(catTitle.context, EditWordsActivity::class.java)
                 editWord.putExtra("word", words[position])
                 editWord.putExtra("create", false)

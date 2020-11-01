@@ -6,9 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import sh.mama.hangman.models.Word
-import sh.mama.hangman.Observer.wordsHolder
-import sh.mama.hangman.Observer.wordsHolder.addWord
-import sh.mama.hangman.Observer.wordsHolder.deleteWord
+import sh.mama.hangman.Observer.ConcreteWords
 import java.io.DataOutputStream
 import java.net.HttpURLConnection
 import java.net.URL
@@ -19,7 +17,7 @@ object DataGetter {
         GlobalScope.launch(Dispatchers.IO) {
             val data = URL("https://mama.sh/hangman/api").readText()
             launch(Dispatchers.Main) {
-                wordsHolder.setWords(parseShit(data))
+                ConcreteWords.setWords(parseShit(data))
             }
         }
     }

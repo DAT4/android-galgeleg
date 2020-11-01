@@ -28,7 +28,7 @@ class CategoryAdapter(
         holder.itemView.apply {
             catTitle.text = categories[position].title
             catCount.text = categories[position].words.size.toString()
-            catTitle.setOnClickListener {
+            content_box.setOnClickListener {
                 if (edit) {
                     val editContext = Intent(catTitle.context, EditCategoryActivity::class.java)
                     editContext.putExtra("category", categories[position])

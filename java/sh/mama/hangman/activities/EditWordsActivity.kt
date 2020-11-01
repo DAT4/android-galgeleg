@@ -15,7 +15,7 @@ import androidx.core.view.forEach
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_add_words.*
 import sh.mama.hangman.Observer.IObserver
-import sh.mama.hangman.Observer.wordsHolder
+import sh.mama.hangman.Observer.ConcreteWords
 import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
@@ -37,7 +37,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
         }
         this.creating = intent.getSerializableExtra("create") as Boolean
 
-        wordsHolder.add(this)
+        ConcreteWords.add(this)
 
         if (this.creating) {
             word_delete.visibility = View.GONE
