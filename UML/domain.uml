@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+actor User
+cloud {
+    component API
+}
+database MongoDB
+frame App{
+    artifact Game
+    artifact CRUD
+}
+User --> Game: Play
+User --> CRUD: CRUD words
+CRUD --> API: send HTTP requests
+API --> MongoDB: Modify
+API <-- MongoDB: Return words
+Game <- API: put words
+@enduml
+

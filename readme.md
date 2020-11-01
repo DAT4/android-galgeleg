@@ -1,6 +1,11 @@
 # Galgeleg App
 
-[Using the REST API](https://github.com/DAT4/android-galgeleg-rest-api)
+This is a game where you can pick a category which holds a number of words. The game will shuffle the words and the player will try to guess a hidden word, letter by letter. If the player guesses a letter which does not exist in the word, then a man, will slowly, step by step, be hung by his neck, on the screen.
+
+The app has some flexibility and gives the user a possibility to change, add, and remove words, and categories from a database on which the app is connected to
+[using the REST API.](https://github.com/DAT4/android-galgeleg-rest-api)
+
+![Diagram of the interaction between different components in the system, the app is using.](UML/domain.png)
 
 ## Patterns
 In the development of the app one key requirement has been to follow software patterns, for me to lean about that.
