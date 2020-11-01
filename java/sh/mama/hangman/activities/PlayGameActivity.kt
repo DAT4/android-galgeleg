@@ -132,15 +132,7 @@ class PlayGameActivity : AppCompatActivity() {
         intent.putExtra("won", won)
         intent.putExtra("word", this.game.word)
         startActivity(intent)
+        finish()
     }
-
-    private fun alerting() {
-        val des = AlertDialog.Builder(this)
-        des.setTitle(game.word.word)
-        des.setMessage(game.word.description)
-        des.setPositiveButton("Restart") { a, b -> finish() }
-        des.show()
-    }
-
 }
 

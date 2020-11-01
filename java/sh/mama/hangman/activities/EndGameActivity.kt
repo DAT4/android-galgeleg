@@ -2,9 +2,11 @@ package sh.mama.hangman.activities
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_end_game.*
 import sh.mama.hangman.R
+import sh.mama.hangman.R.drawable.d
 import sh.mama.hangman.models.Word
 import kotlin.system.exitProcess
 
@@ -24,6 +26,7 @@ class EndGameActivity : AppCompatActivity() {
             word_word.setTextColor(Color.RED)
             state_image.setImageResource(R.drawable.g)
             word_description.text = "You need to win do get the description."
+            word_description.gravity = Gravity.CENTER_HORIZONTAL
         }
     }
 
