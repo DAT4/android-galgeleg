@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
 import sh.mama.hangman.activities.PlayGameActivity
@@ -15,6 +16,7 @@ class WordAdapter(
     private var words: List<Word>,
 ) : RecyclerView.Adapter<WordAdapter.WordViewHoler>() {
     inner class WordViewHoler(itemView: View) : RecyclerView.ViewHolder(itemView)
+    private val buttonClick = AlphaAnimation(1F, 0.8F)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHoler {
         val view = LayoutInflater.from(parent.context)
@@ -27,6 +29,7 @@ class WordAdapter(
             catTitle.text = words[position].word
             catCount.text = words[position].difficulty.toString()
             content_box.setOnClickListener {
+                content_box.startAnimation(buttonClick)
                 val editWord = Intent(catTitle.context, EditWordsActivity::class.java)
                 editWord.putExtra("word", words[position])
                 editWord.putExtra("create", false)

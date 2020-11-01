@@ -14,15 +14,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.core.view.get
 import kotlinx.android.synthetic.main.activity_add_words.*
-import sh.mama.hangman.Observer.IObserver
 import sh.mama.hangman.Observer.ConcreteWords
+import sh.mama.hangman.Observer.IObserver
 import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
 
 class EditWordsActivity : AppCompatActivity(), IObserver {
-    private lateinit var word: Word
     private var creating = false
+    private var difficulty = 0
 
     override fun update() {
         finish()
@@ -31,10 +31,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_words)
-        val data = intent.getSerializableExtra("word") as Word?
-        if (data != null) {
-            this.word = data
-        }
+        var word = intent.getSerializableExtra("word") as Word
         this.creating = intent.getSerializableExtra("create") as Boolean
 
         ConcreteWords.add(this)
@@ -45,7 +42,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
             word_delete.isActivated = true
             word_delete.setOnClickListener {
                 if (it.isActivated) {
-                    DataGetter.updateWord(this.word, "DELETE")
+                    DataGetter.updateWord(word, "DELETE")
                     it.isActivated = false
                 } else {
                     Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT)
@@ -58,12 +55,11 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
         word_add.isActivated = true
         word_add.setOnClickListener {
             if (it.isActivated) {
+                word = updateFromFields(word)
                 if (creating) {
-                    updateFromFields()
-                    DataGetter.updateWord(this.word, "POST")
+                    DataGetter.updateWord(word, "POST")
                 } else {
-                    updateFromFields()
-                    DataGetter.updateWord(this.word, "PUT")
+                    DataGetter.updateWord(word, "PUT")
                 }
 
             } else {
@@ -72,7 +68,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
             it.isActivated = false
         }
         word_abort.setOnClickListener { finish() }
-        fillData(this.word)
+        fillData(word)
     }
 
     private fun EditText.onSubmit(func: () -> Unit) {
@@ -87,13 +83,15 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
         }
     }
 
-    private fun updateFromFields() {
-        this.word.word = word_word.text.toString()
-        this.word.category = word_category.text.toString()
-        this.word.description = word_description.text.toString()
-        this.word.hint1 = word_hint1.text.toString()
-        this.word.hint2 = word_hint2.text.toString()
-        this.word.hint3 = word_hint3.text.toString()
+    private fun updateFromFields(word: Word): Word {
+        word.word = word_word.text.toString()
+        word.category = word_category.text.toString()
+        word.description = word_description.text.toString()
+        word.hint1 = word_hint1.text.toString()
+        word.hint2 = word_hint2.text.toString()
+        word.hint3 = word_hint3.text.toString()
+        word.difficulty = this.difficulty
+        return word
     }
 
     private fun fillData(word: Word) {
@@ -125,7 +123,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
                     that.setBackgroundColor(Color.BLACK)
                 }
                 it.setBackgroundColor(Color.GRAY)
-                this.word.difficulty = i
+                this.difficulty = i
             }
             word_difficulty.addView(button)
         }

@@ -1,8 +1,10 @@
 package sh.mama.hangman.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.animation.AlphaAnimation
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -113,7 +115,8 @@ class PlayGameActivity : AppCompatActivity() {
         }
     }
 
-    fun createButton(title: String, width: Int, function: (button: Button) -> Unit): Button {
+    private val buttonClick = AlphaAnimation(1F, 0.8F)
+    private fun createButton(title: String, width: Int, function: (button: Button) -> Unit): Button {
         val button = Button(this)
         button.layoutParams = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.WRAP_CONTENT,
@@ -122,8 +125,12 @@ class PlayGameActivity : AppCompatActivity() {
         button.layoutParams.width = width
         button.textSize = 24F
         button.text = title
+        button.setBackgroundColor(Color.BLUE)
         button.isActivated = true
-        button.setOnClickListener { function(button) }
+        button.setOnClickListener {
+            button.startAnimation(buttonClick)
+            function(button)
+        }
         return button
     }
 

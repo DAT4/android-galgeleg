@@ -1,6 +1,7 @@
 package sh.mama.hangman.activities
 
 import android.os.Bundle
+import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_pick_context.*
@@ -13,7 +14,7 @@ import sh.mama.hangman.Observer.ConcreteWords
 
 class PickCategoryActivity : AppCompatActivity(), IObserver {
     private var edit = false
-    private var needUpdate = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pick_context)

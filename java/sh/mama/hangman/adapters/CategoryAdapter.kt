@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
@@ -17,6 +18,7 @@ class CategoryAdapter(
     private val edit: Boolean
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    private val buttonClick = AlphaAnimation(1F, 0.5F)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -29,6 +31,7 @@ class CategoryAdapter(
             catTitle.text = categories[position].title
             catCount.text = categories[position].words.size.toString()
             content_box.setOnClickListener {
+                content_box.startAnimation(buttonClick)
                 if (edit) {
                     val editContext = Intent(catTitle.context, EditCategoryActivity::class.java)
                     editContext.putExtra("category", categories[position])
