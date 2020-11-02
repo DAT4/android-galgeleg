@@ -7,7 +7,6 @@ import kotlinx.android.synthetic.main.activity_end_game.*
 import sh.mama.hangman.Observer.ConcreteScores
 import sh.mama.hangman.R
 import sh.mama.hangman.adapters.HighScoreAdapter
-import sh.mama.hangman.models.Word
 
 class HighScoreActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
