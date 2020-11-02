@@ -25,7 +25,12 @@ object ConcreteScores : IObservable {
                 else -> 0
             }
         })
-        return scores
+
+        return if (scores.size > 5) {
+            scores.slice(0 until 5)
+        } else {
+            scores
+        }
     }
 
     fun getHighScoreFromCategory(category: String): List<HighScore> {

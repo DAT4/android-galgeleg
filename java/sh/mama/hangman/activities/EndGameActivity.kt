@@ -36,8 +36,9 @@ class EndGameActivity : AppCompatActivity(), IObserver {
 
         ConcreteScores.add(this)
 
-
         word_word.text = word.word
+
+        printScore()
 
         if (won) {
             word_word.setTextColor(Color.GREEN)

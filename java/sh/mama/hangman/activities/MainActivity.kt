@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import sh.mama.hangman.Observer.ConcreteScores
+import sh.mama.hangman.Observer.ConcreteWords
 import sh.mama.hangman.R
 import kotlin.system.exitProcess
 
@@ -13,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         play.setOnClickListener {
             it.startAnimation(buttonClick)

@@ -1,4 +1,4 @@
-# Galgeleg App
+# Hangman App
 
 This is a game where you can pick a category which holds a number of words. The game will shuffle the words and the player will try to guess a hidden word, letter by letter. If the player guesses a letter which does not exist in the word, then a man, will slowly, step by step, be hung by his neck, on the screen.
 
@@ -22,4 +22,15 @@ Since I am getting data from the internet, I thought that it will be nice if the
 
 ### Other patterns
 Android development is using a lot of different patterns, like for example the way an Adapter Pattern is used to connect a list of objects to a recycler view, and then do some magic in the background so that the app developer does not have to do it.
+
+## To do
+
+1. Let user pick difficulty
+2. High score activity show high scores pr category / word
+3. More patterns
+4. Make app prettier
+    1. Buttons/Keyboard
+    2. Learn animations
+5. Add statistics words/terms
+    1. Dynamic image from description(equations)
 

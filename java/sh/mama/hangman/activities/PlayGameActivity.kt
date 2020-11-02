@@ -30,6 +30,7 @@ class PlayGameActivity : AppCompatActivity() {
         super.onDestroy()
         countDownTimer.cancel()
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -42,9 +43,9 @@ class PlayGameActivity : AppCompatActivity() {
         generateKeyboard()
 
 
-        countDownTimer = object : CountDownTimer(30 * 1000 * 1, 1000) {
+        countDownTimer = object : CountDownTimer(60 * 1000 * 3, 1000) {
             override fun onTick(p0: Long) {
-                time = (p0/1000).toInt()
+                time = (p0 / 1000).toInt()
                 val minutes = p0 / 1000 / 60
                 val seconds = p0 / 1000 % 60
                 if (seconds > 9) {
@@ -139,11 +140,20 @@ class PlayGameActivity : AppCompatActivity() {
     }
 
     private fun endGame(won: Boolean) {
-        val score = HighScore(null, name, this.time, this.hintCounter, this.game.word)
         val intent = Intent(this, EndGameActivity::class.java)
+        if (won) {
+            val score = HighScore(
+                null,
+                name,
+                this.time,
+                this.hintCounter,
+                this.game.hangman.level,
+                this.game.word
+            )
+            intent.putExtra("score", score)
+        }
         intent.putExtra("won", won)
         intent.putExtra("word", this.game.word)
-        intent.putExtra("score", score)
         startActivity(intent)
         finish()
     }
