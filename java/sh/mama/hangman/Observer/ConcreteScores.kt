@@ -18,6 +18,13 @@ object ConcreteScores : IObservable {
                 scores.add(score)
             }
         }
+        scores.sortWith(kotlin.Comparator { lhs, rhs ->
+            when {
+                lhs.getScore() > rhs.getScore() -> -1
+                lhs.getScore() < rhs.getScore() -> 1
+                else -> 0
+            }
+        })
         return scores
     }
 

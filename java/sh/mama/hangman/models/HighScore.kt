@@ -10,7 +10,7 @@ data class HighScore(
     val word:Word
 ) : Serializable {
     fun getScore():Int {
-        return time/1000/hints*word.difficulty
+        return time/hints*word.difficulty
     }
 }
 

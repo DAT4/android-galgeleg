@@ -6,47 +6,47 @@
     tools:context=".activities.MainActivity">
 
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/word_word"
-            android:gravity="center"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="hejsa"
-            />
+            android:layout_margin="20dp"
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:id="@+id/highscore_list"
-            />
+            <TextView
+                android:id="@+id/word_word"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="32sp" />
 
-        <ImageView
-            android:layout_weight="1"
-            android:id="@+id/state_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-        <TextView
-            android:id="@+id/word_description"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-        <Button
-            android:id="@+id/play_again_btn"
-            android:layout_weight="3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Play again"
-            />
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/state_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <Button
+                android:id="@+id/play_again_btn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Play again" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/highscore_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/word_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

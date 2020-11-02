@@ -17,7 +17,6 @@ class HighScoreAdapter(
     private var scores: List<HighScore>,
 ) : RecyclerView.Adapter<HighScoreAdapter.HighScoreViewHolder>() {
     inner class HighScoreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    private val buttonClick = AlphaAnimation(1F, 0.8F)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HighScoreViewHolder {
         val view = LayoutInflater.from(parent.context)
