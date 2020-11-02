@@ -29,6 +29,10 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
         finish()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        ConcreteWords.remove(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_words)
