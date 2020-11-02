@@ -47,7 +47,7 @@ class CategoryAdapter(
                     }
                     HIGHSCORES -> {
                         val intent = Intent(content_box.context, HighScoreActivity::class.java)
-                        intent.putExtra("category", categories[position])
+                        intent.putExtra("category", categories[position].title)
                         content_box.context.startActivity(intent)
                     }
                 }

@@ -10,7 +10,7 @@ import sh.mama.hangman.models.HighScore
 
 class HighScoreAdapter(
     private var scores: List<HighScore>,
-    private val overall: Boolean,
+    private val withWords: Boolean,
 ) : RecyclerView.Adapter<HighScoreAdapter.HighScoreViewHolder>() {
     inner class HighScoreViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -24,7 +24,7 @@ class HighScoreAdapter(
         holder.itemView.apply {
             title.text = scores[position].player
             score.text = scores[position].getScore().toString()
-            if (overall)
+            if (withWords)
                 word.text = scores[position].word.word
         }
     }
