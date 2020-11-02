@@ -25,6 +25,11 @@ class PlayGameActivity : AppCompatActivity() {
     private var hintCounter = 1
     private val letters = ArrayList<TextView>()
     private lateinit var countDownTimer: CountDownTimer
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer.cancel()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -36,7 +41,8 @@ class PlayGameActivity : AppCompatActivity() {
         state.setImageResource(game.hangman.getState())
         generateKeyboard()
 
-        countDownTimer = object : CountDownTimer(60 * 1000 * 5, 1000) {
+
+        countDownTimer = object : CountDownTimer(30 * 1000 * 1, 1000) {
             override fun onTick(p0: Long) {
                 time = (p0/1000).toInt()
                 val minutes = p0 / 1000 / 60
