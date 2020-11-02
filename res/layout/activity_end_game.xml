@@ -34,9 +34,10 @@
                 android:id="@+id/play_again_btn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="5dp"
+                android:layout_margin="55dp"
                 android:background="@color/colorAccent"
                 android:text="Play again"
+                android:textSize="28dp"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
