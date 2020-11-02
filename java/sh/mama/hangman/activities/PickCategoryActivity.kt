@@ -11,14 +11,15 @@ import sh.mama.hangman.adapters.CategoryAdapter
 import sh.mama.hangman.libs.DataGetter.getWords
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.Observer.ConcreteWords
+import sh.mama.hangman.adapters.ActionType
 
 class PickCategoryActivity : AppCompatActivity(), IObserver {
-    private var edit = false
+    private lateinit var actionType:ActionType
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pick_context)
-        this.edit = intent.getSerializableExtra("edit") as Boolean
+        this.actionType = intent.getSerializableExtra("actionType") as ActionType
         ConcreteWords.add(this)
         if (ConcreteWords.isNull()){
             getWords()
@@ -37,7 +38,7 @@ class PickCategoryActivity : AppCompatActivity(), IObserver {
     }
 
     private fun printButtons(data: List<Category>) {
-        val adapter = CategoryAdapter(data, this.edit)
+        val adapter = CategoryAdapter(data, this.actionType)
         categories.adapter = adapter
         categories.layoutManager = LinearLayoutManager(this)
     }

@@ -26,14 +26,14 @@ class WordAdapter(
 
     override fun onBindViewHolder(holder: WordViewHoler, position: Int) {
         holder.itemView.apply {
-            catTitle.text = words[position].word
-            catCount.text = words[position].difficulty.toString()
+            title.text = words[position].word
+            count.text = words[position].difficulty.toString()
             content_box.setOnClickListener {
                 content_box.startAnimation(buttonClick)
-                val editWord = Intent(catTitle.context, EditWordsActivity::class.java)
+                val editWord = Intent(content_box.context, EditWordsActivity::class.java)
                 editWord.putExtra("word", words[position])
                 editWord.putExtra("create", false)
-                catTitle.context.startActivity(editWord)
+                content_box.context.startActivity(editWord)
             }
         }
     }

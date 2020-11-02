@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import sh.mama.hangman.Observer.ConcreteScores
 import sh.mama.hangman.Observer.ConcreteWords
 import sh.mama.hangman.R
+import sh.mama.hangman.adapters.ActionType
 import sh.mama.hangman.libs.DataGetter
 import kotlin.system.exitProcess
 
@@ -24,13 +25,13 @@ class MainActivity : AppCompatActivity() {
         play.setOnClickListener {
             it.startAnimation(buttonClick)
             val game = Intent(this, PickCategoryActivity::class.java)
-            game.putExtra("edit", false)
+            game.putExtra("actionType", ActionType.GAME)
             startActivity(game)
         }
         create_categories.setOnClickListener {
             it.startAnimation(buttonClick)
             val create = Intent(this, PickCategoryActivity::class.java)
-            create.putExtra("edit", true)
+            create.putExtra("actionType", ActionType.EDIT)
             startActivity(create)
         }
         watch_highscores.setOnClickListener {

@@ -9,7 +9,7 @@
     android:background="@drawable/border"
     >
     <TextView
-        android:id="@+id/catTitle"
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:gravity="center_vertical"
         android:layout_height="match_parent"
@@ -19,7 +19,7 @@
         />
     <TextView
         android:layout_weight="4"
-        android:id="@+id/catCount"
+        android:id="@+id/count"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         android:gravity="center"
