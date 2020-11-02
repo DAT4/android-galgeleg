@@ -38,6 +38,10 @@ class EndGameActivity : AppCompatActivity(), IObserver {
 
         word_word.text = word.word
 
+        play_again_btn.setOnClickListener {
+            finish()
+        }
+
         printScore()
 
         if (won) {
