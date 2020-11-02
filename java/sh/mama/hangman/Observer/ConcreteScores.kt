@@ -43,6 +43,22 @@ object ConcreteScores : IObservable {
         return scores
     }
 
+    fun getOverAllHighScores(): List<HighScore> {
+        val scores = this.highscores
+        scores.sortWith(kotlin.Comparator { lhs, rhs ->
+            when {
+                lhs.getScore() > rhs.getScore() -> -1
+                lhs.getScore() < rhs.getScore() -> 1
+                else -> 0
+            }
+        })
+        return if (scores.size > 5) {
+            scores.slice(0 until 5)
+        } else {
+            scores
+        }
+    }
+
     fun setHighScores(scores: MutableList<HighScore>) {
         this.highscores = scores
         sendUpdateEvent()

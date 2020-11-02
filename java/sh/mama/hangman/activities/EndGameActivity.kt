@@ -56,7 +56,7 @@ class EndGameActivity : AppCompatActivity(), IObserver {
     }
 
     private fun printScore() {
-        val adapter = HighScoreAdapter(ConcreteScores.getHighScoreFromWord(this.word))
+        val adapter = HighScoreAdapter(ConcreteScores.getHighScoreFromWord(this.word), false)
         highscore_list.adapter = adapter
         highscore_list.layoutManager = LinearLayoutManager(this)
     }
