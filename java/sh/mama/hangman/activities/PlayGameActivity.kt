@@ -21,6 +21,7 @@ import sh.mama.hangman.models.Word
 class PlayGameActivity : AppCompatActivity() {
     private lateinit var game: Game
     private lateinit var name: String
+    private var time = 0
     private var hintCounter = 1
     private val letters = ArrayList<TextView>()
     private lateinit var countDownTimer: CountDownTimer
@@ -37,6 +38,7 @@ class PlayGameActivity : AppCompatActivity() {
 
         countDownTimer = object : CountDownTimer(60 * 1000 * 5, 1000) {
             override fun onTick(p0: Long) {
+                time = (p0/1000).toInt()
                 val minutes = p0 / 1000 / 60
                 val seconds = p0 / 1000 % 60
                 if (seconds > 9) {
@@ -131,11 +133,11 @@ class PlayGameActivity : AppCompatActivity() {
     }
 
     private fun endGame(won: Boolean) {
-        val score = HighScore(null,name,1,this.hintCounter,this.game.word)
+        val score = HighScore(null, name, this.time, this.hintCounter, this.game.word)
         val intent = Intent(this, EndGameActivity::class.java)
         intent.putExtra("won", won)
         intent.putExtra("word", this.game.word)
-        intent.putExtra("score",score)
+        intent.putExtra("score", score)
         startActivity(intent)
         finish()
     }
