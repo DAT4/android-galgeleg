@@ -7,10 +7,10 @@
     tools:context=".activities.MainActivity">
 
     <LinearLayout
-        android:layout_margin="50dp"
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="50dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,21 +21,19 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="navn"
-            />
+            android:inputType="textPersonName" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="20dp"
-            />
+            android:layout_height="20dp" />
 
         <Button
             android:id="@+id/start_game"
-            android:background="@color/colorPrimary"
-            android:textColor="#FFFFFF"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
             android:text="Start Game"
-            />
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 
