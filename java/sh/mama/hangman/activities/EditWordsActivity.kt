@@ -19,7 +19,6 @@ import sh.mama.hangman.Observer.IObserver
 import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
-import kotlin.properties.Delegates
 
 class EditWordsActivity : AppCompatActivity(), IObserver {
     private var creating = false
@@ -33,6 +32,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
         super.onDestroy()
         ConcreteWords.remove(this)
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_words)
@@ -61,7 +61,7 @@ class EditWordsActivity : AppCompatActivity(), IObserver {
 
         word_add.isActivated = true
         word_add.setOnClickListener {
-            if (it.isActivated ) {
+            if (it.isActivated) {
                 word = updateFromFields(word!!)
                 if (creating) {
                     DataGetter.updateWord(word!!, "POST")
