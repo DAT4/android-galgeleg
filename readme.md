@@ -33,4 +33,11 @@ Android development is using a lot of different patterns, like for example the w
     2. Learn animations
 5. Add statistics words/terms
     1. Dynamic image from description(equations)
+6. Refactor redundant code by use of patterns.
+    + Patterns
+        + Composition
+        + Factory
+    + Code
+        + DataGetter
+        + Adapters
 
