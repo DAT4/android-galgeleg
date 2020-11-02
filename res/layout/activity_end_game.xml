@@ -37,8 +37,8 @@
                 android:layout_margin="55dp"
                 android:background="@color/colorAccent"
                 android:text="Play again"
-                android:textSize="28dp"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="28dp" />
 
             <TextView
                 android:layout_width="match_parent"
