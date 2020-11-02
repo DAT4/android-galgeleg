@@ -2,12 +2,14 @@ package sh.mama.hangman.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import sh.mama.hangman.Observer.ConcreteScores
 import sh.mama.hangman.Observer.ConcreteWords
 import sh.mama.hangman.R
+import sh.mama.hangman.libs.DataGetter
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        DataGetter.getHighScores()
+        DataGetter.getWords()
 
         play.setOnClickListener {
             it.startAnimation(buttonClick)
