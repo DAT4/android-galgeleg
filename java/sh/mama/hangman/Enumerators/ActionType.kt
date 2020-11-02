@@ -1,4 +1,4 @@
-package sh.mama.hangman.adapters
+package sh.mama.hangman.Enumerators
 
 enum class ActionType {
     EDIT, GAME, HIGHSCORES

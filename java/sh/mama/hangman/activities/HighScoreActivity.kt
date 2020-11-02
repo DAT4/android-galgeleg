@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_end_game.highscore_list
 import kotlinx.android.synthetic.main.activity_highscore.*
 import sh.mama.hangman.Observer.ConcreteScores
 import sh.mama.hangman.R
-import sh.mama.hangman.adapters.ActionType
+import sh.mama.hangman.Enumerators.ActionType
 import sh.mama.hangman.adapters.HighScoreAdapter
 
 class HighScoreActivity : AppCompatActivity() {

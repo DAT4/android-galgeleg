@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
+import sh.mama.hangman.Enumerators.ActionType
 import sh.mama.hangman.R
 import sh.mama.hangman.activities.EditCategoryActivity
 import sh.mama.hangman.activities.HighScoreActivity
 import sh.mama.hangman.activities.StartGameActivity
-import sh.mama.hangman.adapters.ActionType.*
+import sh.mama.hangman.Enumerators.ActionType.*
 import sh.mama.hangman.models.Category
 
 class CategoryAdapter(

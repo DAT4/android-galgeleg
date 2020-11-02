@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_pick_context.*
 import sh.mama.hangman.Observer.ConcreteWords
 import sh.mama.hangman.Observer.IObserver
 import sh.mama.hangman.R
-import sh.mama.hangman.adapters.ActionType
+import sh.mama.hangman.Enumerators.ActionType
 import sh.mama.hangman.adapters.CategoryAdapter
 import sh.mama.hangman.libs.DataGetter.getWords
 import sh.mama.hangman.models.Category
