@@ -7,10 +7,6 @@ object ConcreteScores : IObservable {
     private var highscores: MutableList<HighScore> = ArrayList()
     override val observers: ArrayList<IObserver> = ArrayList()
 
-    fun isNull(): Boolean {
-        return this.highscores.isEmpty()
-    }
-
     fun getHighScoreFromWord(word: Word): List<HighScore> {
         val scores: ArrayList<HighScore> = ArrayList()
         this.highscores.forEach { score ->
@@ -18,20 +14,9 @@ object ConcreteScores : IObservable {
                 scores.add(score)
             }
         }
-        scores.sortWith(kotlin.Comparator { lhs, rhs ->
-            when {
-                lhs.getScore() > rhs.getScore() -> -1
-                lhs.getScore() < rhs.getScore() -> 1
-                else -> 0
-            }
-        })
-
-        return if (scores.size > 5) {
-            scores.slice(0 until 5)
-        } else {
-            scores
-        }
+        return order(scores)
     }
+
 
     fun getHighScoreFromCategory(category: String): List<HighScore> {
         val scores: ArrayList<HighScore> = ArrayList()
@@ -40,11 +25,19 @@ object ConcreteScores : IObservable {
                 scores.add(score)
             }
         }
-        return scores
+        return order(scores)
     }
 
     fun getOverAllHighScores(): List<HighScore> {
-        val scores = this.highscores
+        return order(this.highscores as ArrayList<HighScore>)
+    }
+
+    fun setHighScores(scores: MutableList<HighScore>) {
+        this.highscores = scores
+        sendUpdateEvent()
+    }
+
+    private fun order(scores: ArrayList<HighScore>): List<HighScore> {
         scores.sortWith(kotlin.Comparator { lhs, rhs ->
             when {
                 lhs.getScore() > rhs.getScore() -> -1
@@ -52,15 +45,11 @@ object ConcreteScores : IObservable {
                 else -> 0
             }
         })
-        return if (scores.size > 5) {
-            scores.slice(0 until 5)
+
+        return if (scores.size > 10) {
+            scores.slice(0 until 10)
         } else {
             scores
         }
-    }
-
-    fun setHighScores(scores: MutableList<HighScore>) {
-        this.highscores = scores
-        sendUpdateEvent()
     }
 }
