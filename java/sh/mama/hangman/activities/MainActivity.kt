@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
         add_word_button.setOnClickListener {
             it.startAnimation(buttonClick)
-            val addWord = Intent(this, EditWordsActivity::class.java)
+            val addWord = Intent(this, EditWordActivity::class.java)
             addWord.putExtra("create", true)
             startActivity(addWord)
         }

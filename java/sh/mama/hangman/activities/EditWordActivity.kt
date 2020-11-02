@@ -20,7 +20,7 @@ import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
 import sh.mama.hangman.models.Word
 
-class EditWordsActivity : AppCompatActivity(), IObserver {
+class EditWordActivity : AppCompatActivity(), IObserver {
     private var creating = false
     private var difficulty = 1
 

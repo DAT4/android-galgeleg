@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.view.animation.AlphaAnimation
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_category.view.*
-import sh.mama.hangman.activities.PlayGameActivity
 import sh.mama.hangman.R
-import sh.mama.hangman.activities.EditWordsActivity
+import sh.mama.hangman.activities.EditWordActivity
 import sh.mama.hangman.models.Word
 
 class WordAdapter(
@@ -30,7 +29,7 @@ class WordAdapter(
             count.text = words[position].difficulty.toString()
             content_box.setOnClickListener {
                 content_box.startAnimation(buttonClick)
-                val editWord = Intent(content_box.context, EditWordsActivity::class.java)
+                val editWord = Intent(content_box.context, EditWordActivity::class.java)
                 editWord.putExtra("word", words[position])
                 editWord.putExtra("create", false)
                 content_box.context.startActivity(editWord)

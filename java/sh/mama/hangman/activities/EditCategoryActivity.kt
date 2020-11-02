@@ -31,7 +31,7 @@ class EditCategoryActivity : AppCompatActivity(), IObserver {
         this.category = intent.getSerializableExtra("category") as Category
         abort.setOnClickListener { finish() }
         create_context.setOnClickListener {
-            val create = Intent(this, EditWordsActivity::class.java)
+            val create = Intent(this, EditWordActivity::class.java)
             create.putExtra("word", Word(category = category.title))
             create.putExtra("create", true)
             startActivity(create)
