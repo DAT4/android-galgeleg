@@ -14,17 +14,21 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_game.*
 import sh.mama.hangman.R
 import sh.mama.hangman.models.Game
+import sh.mama.hangman.models.HighScore
 import sh.mama.hangman.models.Letter
 import sh.mama.hangman.models.Word
 
 class PlayGameActivity : AppCompatActivity() {
     private lateinit var game: Game
+    private lateinit var name: String
+    private var hintCounter = 1
     private val letters = ArrayList<TextView>()
     private lateinit var countDownTimer: CountDownTimer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
         val word = intent.getSerializableExtra("word") as Word
+        this.name = intent.getSerializableExtra("name") as String
         word.make()
         game = Game(word)
         createWord()
@@ -47,19 +51,18 @@ class PlayGameActivity : AppCompatActivity() {
             }
         }.start()
 
-        var hintcounter = 1
         game_hint.setOnClickListener {
             val des = AlertDialog.Builder(this)
-            des.setTitle("HINT $hintcounter")
-            if (hintcounter == 1)
+            des.setTitle("HINT $this.hintCounter")
+            if (this.hintCounter == 1)
                 des.setMessage(game.word.hint1)
-            if (hintcounter == 2)
+            if (this.hintCounter == 2)
                 des.setMessage(game.word.hint2)
-            if (hintcounter == 3)
+            if (this.hintCounter == 3)
                 des.setMessage(game.word.hint3)
             des.setPositiveButton("OK") { a, b -> }
             des.show()
-            hintcounter++
+            hintCounter++
         }
     }
 
@@ -128,9 +131,11 @@ class PlayGameActivity : AppCompatActivity() {
     }
 
     private fun endGame(won: Boolean) {
+        val score = HighScore(null,name,1,this.hintCounter,this.game.word)
         val intent = Intent(this, EndGameActivity::class.java)
         intent.putExtra("won", won)
         intent.putExtra("word", this.game.word)
+        intent.putExtra("score",score)
         startActivity(intent)
         finish()
     }

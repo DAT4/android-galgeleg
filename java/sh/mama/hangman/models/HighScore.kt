@@ -3,7 +3,7 @@ package sh.mama.hangman.models
 import java.io.Serializable
 
 data class HighScore(
-    val ID: String,
+    val ID: String?,
     val player: String,
     val time: Int,
     val hints: Int,

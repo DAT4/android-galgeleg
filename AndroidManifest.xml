@@ -13,6 +13,7 @@
 
         <activity android:name="sh.mama.hangman.activities.EndGameActivity"/>
         <activity android:name="sh.mama.hangman.activities.HighScoreActivity"/>
+        <activity android:name="sh.mama.hangman.activities.StartGameActivity"/>
         <activity android:name="sh.mama.hangman.activities.EditWordsActivity"/>
         <activity android:name="sh.mama.hangman.activities.EditCategoryActivity"/>
         <activity android:name="sh.mama.hangman.activities.PickCategoryActivity"/>

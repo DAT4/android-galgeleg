@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.item_category.view.*
 import sh.mama.hangman.activities.EditCategoryActivity
 import sh.mama.hangman.activities.PlayGameActivity
 import sh.mama.hangman.R
+import sh.mama.hangman.activities.StartGameActivity
 import sh.mama.hangman.models.Category
 
 class CategoryAdapter(
@@ -37,7 +38,7 @@ class CategoryAdapter(
                     editContext.putExtra("category", categories[position])
                     catTitle.context.startActivity(editContext)
                 } else {
-                    val game = Intent(catTitle.context, PlayGameActivity::class.java)
+                    val game = Intent(catTitle.context, StartGameActivity::class.java)
                     game.putExtra("word", categories[position].getOne())
                     catTitle.context.startActivity(game)
                 }
