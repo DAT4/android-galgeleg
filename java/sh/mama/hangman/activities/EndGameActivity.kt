@@ -48,7 +48,7 @@ class EndGameActivity : AppCompatActivity(), IObserver {
                 DataGetter.updateScore(score, "POST")
         } else {
             word_word.setTextColor(Color.RED)
-            state_image.setImageResource(R.drawable.g)
+            state_image.setImageResource(R.drawable.h)
             word_description.text = "You need to win do get the description."
             word_description.gravity = Gravity.CENTER_HORIZONTAL
         }

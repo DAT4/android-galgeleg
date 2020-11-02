@@ -12,7 +12,8 @@ class HangMan {
         R.drawable.d,
         R.drawable.e,
         R.drawable.f,
-        R.drawable.g
+        R.drawable.g,
+        R.drawable.h,
     )
 
     fun kill(): Boolean {
