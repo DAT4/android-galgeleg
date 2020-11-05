@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_end_game.highscore_list
 import kotlinx.android.synthetic.main.activity_highscore.*
-import sh.mama.hangman.Observer.ConcreteScores
+import sh.mama.hangman.observer.ConcreteScores
 import sh.mama.hangman.R
-import sh.mama.hangman.Enumerators.ActionType
+import sh.mama.hangman.enumerators.ActionType
 import sh.mama.hangman.adapters.HighScoreAdapter
 
 class HighScoreActivity : AppCompatActivity() {
@@ -21,6 +21,7 @@ class HighScoreActivity : AppCompatActivity() {
         this.categoryTitle = intent.getStringExtra("category")
         if (categoryTitle != null) {
             this.global = false
+            headline.text = categoryTitle
             category_btn.visibility = View.GONE
         } else {
             category_btn.setOnClickListener {

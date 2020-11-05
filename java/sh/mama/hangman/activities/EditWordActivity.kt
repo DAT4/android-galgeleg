@@ -13,12 +13,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.forEach
 import androidx.core.view.get
+import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_add_words.*
-import sh.mama.hangman.Observer.ConcreteWords
-import sh.mama.hangman.Observer.IObserver
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import sh.mama.hangman.observer.ConcreteWords
+import sh.mama.hangman.observer.IObserver
 import sh.mama.hangman.R
 import sh.mama.hangman.libs.DataGetter
+import sh.mama.hangman.libs.DataGetter.getStuff
+import sh.mama.hangman.libs.DataGetter.updateStuff
+import sh.mama.hangman.libs.RequestType
+import sh.mama.hangman.models.HighScore
 import sh.mama.hangman.models.Word
+import sh.mama.hangman.observer.ConcreteScores.setHighScores
+import sh.mama.hangman.observer.ConcreteWords.setWords
 
 class EditWordActivity : AppCompatActivity(), IObserver {
     private var creating = false
@@ -49,7 +59,15 @@ class EditWordActivity : AppCompatActivity(), IObserver {
             word_delete.isActivated = true
             word_delete.setOnClickListener {
                 if (it.isActivated) {
-                    DataGetter.updateWord(word!!, "DELETE")
+                    GlobalScope.launch(Dispatchers.IO) {
+                        val url = "https://mama.sh/hangman/api"
+                        val type = object : TypeToken<List<Word>>() {}.type
+                        updateStuff(word!!, url, RequestType.DELETE)
+                        val data: MutableList<Word> = getStuff(url, type)
+                        launch(Dispatchers.Main) {
+                            setWords(data)
+                        }
+                    }
                     it.isActivated = false
                 } else {
                     Toast.makeText(this, "You already clicked the button.", Toast.LENGTH_SHORT)
@@ -63,10 +81,18 @@ class EditWordActivity : AppCompatActivity(), IObserver {
         word_add.setOnClickListener {
             if (it.isActivated) {
                 word = updateFromFields(word!!)
-                if (creating) {
-                    DataGetter.updateWord(word!!, "POST")
-                } else {
-                    DataGetter.updateWord(word!!, "PUT")
+                GlobalScope.launch(Dispatchers.IO) {
+                    val url = "https://mama.sh/hangman/api"
+                    if (creating) {
+                        updateStuff(word!!, url, RequestType.POST)
+                    } else {
+                        updateStuff(word!!, url, RequestType.PUT)
+                    }
+                    val type = object : TypeToken<List<Word>>() {}.type
+                    val data: MutableList<Word> = getStuff(url, type)
+                    launch(Dispatchers.Main) {
+                        setWords(data)
+                    }
                 }
 
             } else {

@@ -1,4 +1,4 @@
-package sh.mama.hangman.Observer
+package sh.mama.hangman.observer
 
 import sh.mama.hangman.models.Category
 import sh.mama.hangman.models.Word

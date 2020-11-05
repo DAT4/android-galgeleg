@@ -9,9 +9,9 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_create_context.*
-import sh.mama.hangman.Observer.IObserver
-import sh.mama.hangman.Observer.ConcreteWords
-import sh.mama.hangman.Observer.ConcreteWords.getCategory
+import sh.mama.hangman.observer.IObserver
+import sh.mama.hangman.observer.ConcreteWords
+import sh.mama.hangman.observer.ConcreteWords.getCategory
 import sh.mama.hangman.R
 import sh.mama.hangman.adapters.WordAdapter
 import sh.mama.hangman.models.Category

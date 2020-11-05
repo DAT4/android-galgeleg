@@ -11,51 +11,63 @@ class PlayGameActivity{
 }
 
 package models{
-class Category<Serializable>{
-    + title:String
-    + words:ArrayList<Word>
-    + getOne()
+    class Category<Serializable>{
+        + title:String
+        + words:ArrayList<Word>
+        + getOne()
+    }
+
+    class Game{
+        + word:Word
+        + hangman:Hangman
+        + options:List<Letter>
+        + isDone():Boolean
+        + guess():Boolean
+    }
+
+    class HangMan{
+        - level:Int
+        - states:List<Drawable>
+        + kill():Boolean
+        + getState():Drawable
+    }
+
+    class Letter{
+        - letter:Char
+        - guessed:Boolean
+        + isGuessed():Boolean
+        + guess():Boolean
+    }
+    
+    class Word<Serializable>{
+        + ID:String
+        + word:String
+        + difficulty:Int
+        + description:String
+        + hint1:String
+        + hint2:String
+        + hint3:String
+        + category:String
+        + letters:List<Letter>
+        + make()
+    }
+
+    class HighScore<Serializable>{
+        + ID:String?
+        + player:String,
+        + time:Int,
+        + hints:Int
+        + wrongs:Int
+        + word:Word
+    }
 }
-class Game{
-    + word:Word
-    + hangman:Hangman
-    + options:List<Letter>
-    + isDone():Boolean
-    + guess():Boolean
-}
+
+
+Game <. PlayGameActivity 
 Game -l-> Word
 HangMan <-- Game
 Game --> Letter
 Category --> Word
 Word --> Letter
-class HangMan{
-    - level:Int
-    - states:List<Drawable>
-    + kill():Boolean
-    + getState():Drawable
-}
-class Letter{
-    - letter:Char
-    - guessed:Boolean
-    + isGuessed():Boolean
-    + guess():Boolean
-}
-
-class Word<Serializable>{
-    + ID:String
-    + word:String
-    + difficulty:Int
-    + description:String
-    + hint1:String
-    + hint2:String
-    + hint3:String
-    + category:String
-    + letters:List<Letter>
-    + make()
-}
-}
-
-
-Game <. PlayGameActivity 
 
 @enduml

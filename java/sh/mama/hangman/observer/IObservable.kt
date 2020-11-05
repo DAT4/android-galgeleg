@@ -1,5 +1,6 @@
-package sh.mama.hangman.Observer
+package sh.mama.hangman.observer
 
+import java.util.*
 import kotlin.collections.ArrayList
 
 interface IObservable {
