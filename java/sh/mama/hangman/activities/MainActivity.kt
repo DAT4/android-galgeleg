@@ -4,18 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.animation.AlphaAnimation
 import androidx.appcompat.app.AppCompatActivity
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import sh.mama.hangman.R
 import sh.mama.hangman.enumerators.ActionType
-import sh.mama.hangman.libs.DataGetter.getStuff
-import sh.mama.hangman.models.HighScore
-import sh.mama.hangman.models.Word
-import sh.mama.hangman.observer.ConcreteScores.setHighScores
-import sh.mama.hangman.observer.ConcreteWords.setWords
+import sh.mama.hangman.observer.ConcreteScores
+import sh.mama.hangman.observer.ConcreteWords
 import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
@@ -24,16 +17,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        GlobalScope.launch(Dispatchers.IO){
-            val wordType = object : TypeToken<List<Word>>() {}.type
-            val highScoreType = object : TypeToken<List<HighScore>>() {}.type
-            val highScores:List<HighScore> = getStuff("https://mama.sh/hangman/api/highscores",highScoreType)
-            val words:List<Word> = getStuff("https://mama.sh/hangman/api",wordType)
-            launch (Dispatchers.Main){
-                setHighScores(highScores as MutableList<HighScore>)
-                setWords(words as MutableList<Word>)
-            }
-        }
+        ConcreteWords.cache()
+        ConcreteScores.cache()
 
         play.setOnClickListener {
             it.startAnimation(buttonClick)

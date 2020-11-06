@@ -1,7 +1,7 @@
 package sh.mama.hangman.libs
 
 import com.google.gson.Gson
-import kotlinx.coroutines.*
+import sh.mama.hangman.enumerators.RequestType
 import java.io.DataOutputStream
 import java.lang.reflect.Type
 import java.net.HttpURLConnection

@@ -5,21 +5,14 @@ import android.os.Bundle
 import android.view.Gravity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.reflect.TypeToken
 import kotlinx.android.synthetic.main.activity_end_game.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import sh.mama.hangman.observer.ConcreteScores
 import sh.mama.hangman.observer.IObserver
 import sh.mama.hangman.R
 import sh.mama.hangman.adapters.HighScoreAdapter
-import sh.mama.hangman.libs.DataGetter.getStuff
-import sh.mama.hangman.libs.DataGetter.updateStuff
-import sh.mama.hangman.libs.RequestType
+import sh.mama.hangman.enumerators.RequestType
 import sh.mama.hangman.models.HighScore
 import sh.mama.hangman.models.Word
-import sh.mama.hangman.observer.ConcreteScores.setHighScores
 import kotlin.system.exitProcess
 
 class EndGameActivity : AppCompatActivity(), IObserver {
@@ -56,16 +49,7 @@ class EndGameActivity : AppCompatActivity(), IObserver {
             state_image.setImageResource(R.drawable.win)
             word_description.text = word.description
             if (score != null){
-                GlobalScope.launch(Dispatchers.IO){
-                    val url = "https://mama.sh/hangman/api/highscores"
-                    val type = object : TypeToken<List<HighScore>>() {}.type
-                    updateStuff(score,url,RequestType.POST)
-                    val highScores:MutableList<HighScore> = getStuff(url, type)
-                    launch(Dispatchers.Main){
-                        setHighScores(highScores)
-                    }
-                }
-
+                ConcreteScores.update(score,RequestType.POST)
             }
 
         } else {
