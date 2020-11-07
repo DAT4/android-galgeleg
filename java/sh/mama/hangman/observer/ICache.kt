@@ -25,7 +25,7 @@ interface ICache: IObservable{
     fun update(model:Any, method: RequestType){
         GlobalScope.launch(Dispatchers.IO){
             updateStuff(model,this@ICache.url,method)
+            cache()
         }
-        cache()
     }
 }

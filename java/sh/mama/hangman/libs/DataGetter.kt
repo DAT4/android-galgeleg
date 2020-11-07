@@ -21,10 +21,8 @@ object DataGetter {
         con.connectTimeout = 300000
         con.doOutput = true
         val json = Gson().toJson(model)
-        println(json)
         val data = (json).toByteArray()
         con.setRequestProperty("Content-Type", "application/json")
-
         val request = DataOutputStream(con.outputStream)
         request.write(data)
         request.flush()
