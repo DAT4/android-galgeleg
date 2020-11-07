@@ -11,12 +11,14 @@ import sh.mama.hangman.observer.ConcreteScores
 import sh.mama.hangman.R
 import sh.mama.hangman.enumerators.ActionType
 import sh.mama.hangman.adapters.HighScoreAdapter
+import sh.mama.hangman.observer.IObserver
 
-class HighScoreActivity : AppCompatActivity() {
+class HighScoreActivity : AppCompatActivity(),IObserver {
     private var global = true
     private var categoryTitle: String? = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ConcreteScores.add(this)
         setContentView(R.layout.activity_highscore)
         this.categoryTitle = intent.getStringExtra("category")
         if (categoryTitle != null) {
@@ -42,6 +44,15 @@ class HighScoreActivity : AppCompatActivity() {
         val adapter = HighScoreAdapter(highScores, true)
         highscore_list.adapter = adapter
         highscore_list.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun update() {
+        printScore()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        ConcreteScores.remove(this)
     }
 }
 
