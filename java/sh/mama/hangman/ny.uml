@@ -1,0 +1,11 @@
+@startuml
+package oj {
+    class Player{
+        + int hej
+    }
+    class Field{
+        + int pos
+    }
+}
+
+@enduml

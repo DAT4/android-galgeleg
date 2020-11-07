@@ -54,7 +54,7 @@ class EndGameActivity : AppCompatActivity(), IObserver {
 
         } else {
             word_word.setTextColor(Color.RED)
-            state_image.setImageResource(R.drawable.h)
+            state_image.setImageResource(R.drawable.loose)
             word_description.text = "You need to win do get the description."
             word_description.gravity = Gravity.CENTER_HORIZONTAL
         }
@@ -65,11 +65,6 @@ class EndGameActivity : AppCompatActivity(), IObserver {
         val adapter = HighScoreAdapter(ConcreteScores.getHighScoreFromWord(this.word), false)
         highscore_list.adapter = adapter
         highscore_list.layoutManager = LinearLayoutManager(this)
-    }
-
-    private fun end() {
-        moveTaskToBack(true)
-        exitProcess(-1)
     }
 }
 
