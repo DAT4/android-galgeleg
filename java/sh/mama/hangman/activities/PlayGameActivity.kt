@@ -83,8 +83,10 @@ class PlayGameActivity : AppCompatActivity() {
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
             x.layoutParams.width = 75
-            x.textSize = 24F
-            x.text = "_"
+            x.textSize = 20F
+            if(!letter.isGuessed()){
+                x.text = "_"
+            }
             x.isActivated = false
             letters.add(x)
             bogstaver.addView(x)
