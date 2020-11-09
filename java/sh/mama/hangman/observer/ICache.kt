@@ -13,8 +13,9 @@ import java.lang.reflect.Type
  */
 interface ICache : IObservable {
     val type: Type
-    var content: ArrayList<*>
     val url: String
+
+    var content: ArrayList<*>
 
     fun cache() {
         GlobalScope.launch(Dispatchers.IO) {
