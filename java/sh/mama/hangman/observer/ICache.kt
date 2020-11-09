@@ -8,9 +8,6 @@ import sh.mama.hangman.libs.DataGetter.getStuff
 import sh.mama.hangman.libs.DataGetter.updateStuff
 import java.lang.reflect.Type
 
-/**
- * Interface
- */
 interface ICache : IObservable {
     val type: Type
     val url: String

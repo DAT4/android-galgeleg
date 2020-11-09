@@ -16,4 +16,3 @@ API --> MongoDB: Modify
 API <-- MongoDB: Return words
 Game <- API: put words
 @enduml
-

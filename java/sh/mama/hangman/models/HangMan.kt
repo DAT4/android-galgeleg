@@ -3,9 +3,8 @@ package sh.mama.hangman.models
 import sh.mama.hangman.R
 
 class HangMan {
-    var level = 0
-
-    private val states = listOf(
+    private var level = 0
+    private val states: List<Int> = listOf(
         R.drawable.a,
         R.drawable.b,
         R.drawable.c,

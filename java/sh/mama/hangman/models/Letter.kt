@@ -2,12 +2,14 @@ package sh.mama.hangman.models
 
 import java.io.Serializable
 
-class Letter(letter: Char) :Serializable{
-    private val letter = letter.toUpperCase()
-    private var guessed = false
+data class Letter(
+    var letter: Char,
+    var guessed: Boolean = false
+) : Serializable {
 
     init {
-        if (letter == ' '){
+        letter = letter.toUpperCase()
+        if (letter == ' ') {
             this.guessed = true
         }
     }

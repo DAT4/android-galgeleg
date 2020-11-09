@@ -1,0 +1,86 @@
+@startuml
+skinparam linetype ortho
+class models.Category <Serializable> {
+    title: String
+    words: ArrayList<Word>
+    getOne(): Word
+}
+
+models.Category --> models.Word
+
+class models.Game {
+    word: Word
+    hangman: Hangman
+    options: List<Letter>
+    isDone(): Boolean
+    guess(letter: Letter): Boolean
+}
+
+models.Game -l-> models.Word
+models.Game -l-> models.Letter
+models.Game --> models.HangMan
+
+class models.HangMan {
+    - level
+    - states: List<Drawable>
+    kill(): Boolean
+    getState(): Int
+}
+
+class models.HighScore <Serializable>{
+    ID: String?,
+    player: String,
+    time: Int,
+    hints: Int,
+    wrongs: Int,
+    word: Word
+    getScore():Int
+}
+
+models.HighScore -r-> models.Word
+
+class models.Letter <Serializable>{
+    letter: Char
+    guessed: Boolean
+    init()
+    isGuessed(): Boolean
+    guess(letter: Letter): Boolean
+    toString(): String
+}
+
+class models.Word <Serializable> {
+    ID: String 
+    word: String 
+    difficulty: Int 
+    description: String 
+    hint1: String 
+    hint2: String 
+    hint3: String 
+    category: String 
+    letters: List<Letter>
+    make()
+}
+
+models.Word --> models.Letter
+
+class PlayGameActivity <AppCompatActivity> {
+    - game: Game
+    - name: String
+    - time: Int
+    - hintCounter: Int
+    - letters: ArrayList<TextView>
+    - countDownTimer: CountDownTimer
+    - buttonClick: AlphaAnimation
+    - createWord() 
+    - updateWord() 
+    - generateKeyboard() 
+    - guess(button: Button, letter: Letter) 
+    - createButton(title: String, function: (button: Button) -> Unit): Button 
+    - endGame(won: Boolean) 
+    onDestroy() 
+    onCreate(savedInstanceState: Bundle?) 
+}
+
+PlayGameActivity -l-> models.Game
+
+@enduml

@@ -2,7 +2,7 @@ package sh.mama.hangman.models
 
 data class Game(val word: Word) {
     val hangman = HangMan()
-    val options = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ ".toList().map { Letter(it) }
+    val options = "ABCDEFGHIJKLMNOPQRSTUVWXYZÆØÅ".toList().map { Letter(it) }
 
     fun isDone(): Boolean {
         var isDone = true

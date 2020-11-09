@@ -1,0 +1,65 @@
+@startuml
+skinparam linetype ortho
+class ConcreteScores << (O,#FF7700) >> implements ICache {
+    url: String
+    type: Type
+    content: ArrayList<*>
+    observers: ArrayList<IObserver>
+    getHighScoreFromWord(word: Word): List<HighScore>
+    getHighScoreFromCategory(category: String): List<HighScore>
+    getOverAllHighScores(): List<HighScore>
+    setHighScores(scores: ArrayList<HighScore>)
+    order(scores: ArrayList<HighScore>): List<HighScore>
+}
+
+
+class ConcreteWords << (O,#FF7700) >> implements ICache {
+    url: String
+    type: Type
+    content: ArrayList<*>
+    observers: ArrayList<IObserver>
+    isNull(): Boolean
+    getCategories(): ArrayList<Category>
+    getCategory(title: String): Category
+    setWords(words: ArrayList<Word>)
+}
+
+
+interface ICache implements IObservable {
+    type: Type
+    url: String
+    content: ArrayList<*>
+    cache()
+    update(model: Any, method: RequestType)
+}
+
+ICache -> DataGetter
+
+interface IObservable {
+    observers: ArrayList<IObserver>
+    add(observer: IObserver)
+    remove(observer: IObserver)
+    sendUpdateEvent()
+}
+
+IObservable --r-> IObserver
+
+interface IObserver {
+    update()
+}
+
+class DataGetter << (O,#FF7700) >> {
+    getStuff(url: String, type: Type): T
+    updateStuff(model: Any, url: String, action: RequestType)
+}
+
+DataGetter -d-> RequestType
+
+enum RequestType {
+    POST
+    GET
+    PUT
+    DELETE
+}
+
+@enduml
