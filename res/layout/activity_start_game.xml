@@ -22,7 +22,7 @@
             android:layout_height="match_parent"
             android:textSize="32dp"
             android:capitalize="characters"
-            android:hint="Name"
+            android:hint="Your Name"
             android:inputType="textPersonName" />
 
         <Space

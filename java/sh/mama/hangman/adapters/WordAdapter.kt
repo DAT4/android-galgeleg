@@ -26,7 +26,6 @@ class WordAdapter(
     override fun onBindViewHolder(holder: WordViewHoler, position: Int) {
         holder.itemView.apply {
             title.text = words[position].word
-            count.text = words[position].difficulty.toString()
             content_box.setOnClickListener {
                 content_box.startAnimation(buttonClick)
                 val editWord = Intent(content_box.context, EditWordActivity::class.java)

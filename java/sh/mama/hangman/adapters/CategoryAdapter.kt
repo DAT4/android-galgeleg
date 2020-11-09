@@ -32,26 +32,8 @@ class CategoryAdapter(
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.itemView.apply {
             title.text = categories[position].title
-            count.text = categories[position].words.size.toString()
             content_box.setOnClickListener {
                 content_box.startAnimation(buttonClick)
-                when (action) {
-                    EDIT -> {
-                        val intent = Intent(content_box.context, EditCategoryActivity::class.java)
-                        intent.putExtra("category", categories[position])
-                        content_box.context.startActivity(intent)
-                    }
-                    GAME -> {
-                        val intent = Intent(content_box.context, StartGameActivity::class.java)
-                        intent.putExtra("word", categories[position].getOne())
-                        content_box.context.startActivity(intent)
-                    }
-                    HIGHSCORES -> {
-                        val intent = Intent(content_box.context, HighScoreActivity::class.java)
-                        intent.putExtra("category", categories[position].title)
-                        content_box.context.startActivity(intent)
-                    }
-                }
             }
         }
     }
